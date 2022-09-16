@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
+
+.main{
+  .sectionInfo{
+    text-align: left;
+    .title{
+      color: #F1C50E;
+      font-size: 48px;
+      font-family: 'Oswald', sans-serif;
+      margin-left: 20px;
+      margin-bottom: 0;
+    }
+    .subtitle{
+      color: #B3B3B3;
+      margin-left: 20px;
+      font-size: 24px;
+      margin-top: 0;
+      font-weight: 100;
+      font-family: 'Oswald', sans-serif;
+      padding: 0;
+    }
+
+    .paragraph{
+      color: #111111;
+      margin-left:20px;
+      text-align: left;
+      font-size: 20px;
+      font-family: 'Oswald', sans-serif;
+      margin-right: 20px;
+    } 
+  }
+  .sectionImg{
+    height: auto;
+    margin: 10px; 
+  }
+}
+
+.content{
+  background: #F1C50E;
+  text-align: center;
+  padding-bottom: 50px;
+  .homeCleaning{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: auto;
+    margin: 0 20px 10px 20px;
+    .homeCleaning__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .homeCleaning__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .homeCleaning__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .smartHome{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: auto;
+    margin: 0 20px 10px 20px;
+    .smartHome__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .smartHome__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .smartHome__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .interiorPaintin{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: auto;
+    margin: 0 20px 10px 20px;
+    .interiorPaintin__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .interiorPaintin__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .interiorPaintin__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .lightFixures{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: auto;
+    margin: 0 20px 10px 20px;
+    .lightFixures__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .lightFixures__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .lightFixures__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+      
+    }
+  } 
+}
+
+.about{
+  background: #E5E5E5;
+  text-align: center;
+  padding-bottom: 50px;
+  h1{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .about__title{
+    color: #111111;
+    font-size: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+  }
+  .about__paragraph{
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: #111111;
+    font-weight: bold;
+    width: 90%;
+    margin: auto;
+    line-height:30px;
+  }
+  .about__button{
+    background: #EAC60B;
+    padding-top: 20px;
+    width: 250px;
+    height: 60px;
+    margin: auto;
+    color: #111111;
+    font-size: 25px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin: 30px auto 60px; 
+  }
+  
+}
+
+@media (min-width: 768px){
+.main{
+  width: 100%;
+  display: flex;
+  .sectionInfo{
+    margin-left: 200px;
+    margin-right: 100px;
+    width: 450px;
+    .title{
+      color: #F1C50E;
+      font-size: 85px;
+      margin-left: 20px;
+      margin-top: 100px;
+      margin-bottom: 0;
+      font-family: 'Oswald', sans-serif;
+      padding: 0;
+    }
+    .subtitle{
+      color: #B3B3B3;
+      margin-left: 20px;
+      font-size: 60px;
+      margin-top: 0;
+      font-weight: 100;
+      font-family: 'Oswald', sans-serif;
+      padding: 0;
+    }
+
+    .paragraph{
+      color: #111111;
+      margin-left:20px;
+      text-align: left;
+      font-size: 20px;
+      font-family: 'Oswald', sans-serif;
+      margin-right: 20px;
+      
+    } 
+  }
+  .sectionImg{
+    height: auto;
+    margin: auto;
+  }
+}
+
+.content{
+  background: #F1C50E;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding-bottom: 50px;
+  .homeCleaning{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    margin: 0 5px 0 50px;
+    .homeCleaning__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .homeCleaning__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .homeCleaning__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .smartHome{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    margin: 0 5px;
+    .smartHome__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .smartHome__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .smartHome__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .interiorPaintin{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    margin: 0 5px;
+    .interiorPaintin__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .interiorPaintin__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .interiorPaintin__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+    }
+  }
+  .lightFixures{
+    background: #FFFFFF;
+    text-align: center;
+    padding: 30px;
+    width: 350px;
+    margin: 0 50px 0 5px;
+    .lightFixures__img{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 15px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .lightFixures__title{
+      color:#F1C50E;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: 'Oswald', sans-serif;
+      margin: 20px 0 0;      
+    }  
+    .lightFixures__paragraph {
+      color: #808080;
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      font-style: italic;
+      
+    }
+  } 
+}
+
+.about{
+  background: #E5E5E5;
+  text-align: center;
+  padding-bottom: 50px;
+  h1{
+    margin-top: 0;
+    padding: 60px 450px 0;
+    margin-bottom: 0;
+  }
+  .about__title{
+    color: #111111;
+    font-size: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+  }
+  .about__paragraph{
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: #111111;
+    font-weight: bold;
+    width: 800px;
+    margin: auto;
+    line-height:30px;
+  }
+  .about__button{
+    background: #EAC60B;
+    padding-top: 20px;
+    width: 250px;
+    height: 60px;
+    margin: auto;
+    color: #111111;
+    font-size: 25px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin: 30px auto 60px; 
+  }
+}
+}
