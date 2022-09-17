@@ -2,8 +2,9 @@ import { findProfessionalByEmail } from "../../../../server/professional/profess
 import { signToken } from "../../../../server/auth/auth.service";
 import dbConnect from "../../../../server/config/database";
 
+
 export default async function loginProf(req, res) {
-  await dbConnect();
+await dbConnect();
   const { email, password } = req.body;
   const professional = await findProfessionalByEmail(email);
     try{
@@ -20,3 +21,4 @@ export default async function loginProf(req, res) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
+

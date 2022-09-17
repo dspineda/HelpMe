@@ -1,6 +1,8 @@
 import { Schema, model, models } from "mongoose";
 import bcrypt from "bcrypt";
 
+const { SALT_ROUNDS } = process.env;
+
 const ProfessionalSchema = new Schema(
   {
     firstName: {
@@ -71,12 +73,34 @@ const ProfessionalSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    isActivated: {
+      type: Boolean,
+      default: false, 
+    },
+    passwordResetActivationToken: String,
+    passwordResetActivationExpires: Date,
   },
   {
     timestamps: true,
     versionKey: false,
   }
 );
+
+ProfessionalSchema.pre('save', async function save(next) {
+  const professional = this;
+
+  try {
+    if (!professional.isModified('password')) {
+      next();
+    }
+    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
+    const hash = await bcrypt.hash(professional.password, salt);
+
+    professional.password = hash;
+  } catch (e) {
+    next(e);
+  }
+});
 
 ProfessionalSchema.methods.comparePassword = async function comparepassword(
 	enteredPassword,
@@ -92,22 +116,5 @@ ProfessionalSchema.methods.comparePassword = async function comparepassword(
 		return false;
 	}
 };
-
-
-/*
-ProfessionalSchema.pre("save", async function (next) {
-  const professional = this;
-  try {
-    if(!professional.isModified("password")) {
-      return next();
-    }
-    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
-    const hash = await bcrypt.hash(professional.password, salt);
-    professional.password = hash;
-  } catch (error) {
-    next(error);
-  }
-});
-*/
 
 export default models.Professional || model("Professional", ProfessionalSchema);
