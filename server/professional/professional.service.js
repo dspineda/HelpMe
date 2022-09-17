@@ -17,3 +17,12 @@ export const findProfessionalByEmail = async (email) => {
     throw new Error(error)
   }
 }
+
+export const findOneUser = async (query) => {
+  try {
+    const professional = await Professional.findOne(query)
+    return professional
+  } catch (error) {
+    throw new Error(error)
+  }
+}

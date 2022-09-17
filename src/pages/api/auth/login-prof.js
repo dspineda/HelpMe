@@ -11,6 +11,9 @@ await dbConnect();
     if (!professional) {
       return res.status(400).json({ message: "User does not exist" });
     }
+    if (!professional.isActivated) {
+      return res.status(400).json({ message: "User is not activated" });
+    }
     const isMatch = await professional.comparePassword(password);
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
