@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
+
+.container{
+  .header{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    h1{
+      margin: 0;
+      padding: 0;
+    }
+    .header__img1{
+      width: 120px;
+      height: 120px;
+      background: #F1C50E;
+      padding-top: 12px;
+      padding-left: 12px;
+      border-radius: 50%;
+    }
+    .header__title{
+      color: #F1C50E;
+      font-size: 48px;
+      font-family: 'Oswald', sans-serif;
+      margin-left: 20px;
+      margin-bottom: 0;
+    }
+  }
+  .info__services{
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    background: #E5E5E5;
+    height: 100vh;
+    .info__services__paint{
+      width: 280px;
+      height: 360px;
+      padding: 30px;
+      margin-bottom: 80px;
+      background: white; 
+      h4{
+        margin-top: 0;
+      }
+      .info__services__paint__title{
+        color:#F1C50E;
+        font-size: 24px;
+        font-family: 'Oswald', sans-serif;
+      }
+      .info__services__paint__paragraph{
+        color: #808080;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        font-style: italic;
+      }
+    }
+  }
+}

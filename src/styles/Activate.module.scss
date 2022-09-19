@@ -48,9 +48,11 @@
       border: none;
       margin-left: 50px;
       }
-    button:hover{
-      background: #B3B3B3;
-    }  
+      button:hover{
+        background: rgb(240, 207, 45);
+        transition: 1s;
+        transform: scale(1.1);
+      }
   }
 }
 
@@ -103,9 +105,11 @@
         border: none;
         margin-left: 70px;
         }
-      button:hover{
-        background: #B3B3B3;
-      }  
+        button:hover{
+          background: rgb(240, 207, 45);
+          transition: 1s;
+          transform: scale(1.1);
+        }
     }
   }
 }

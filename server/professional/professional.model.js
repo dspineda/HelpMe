@@ -40,12 +40,11 @@ const ProfessionalSchema = new Schema(
       type: String,
       //required: true,
     },
-    services: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Service",
-      },
-    ],
+    services: {
+      type: Schema.Types.ObjectId,
+      ref: "Service",
+    },
+
     certificates: [
       {
         name: {
@@ -75,7 +74,7 @@ const ProfessionalSchema = new Schema(
     },
     isActivated: {
       type: Boolean,
-      default: false, 
+      default: false,
     },
     passwordResetActivationToken: String,
     passwordResetActivationExpires: Date,
@@ -86,11 +85,11 @@ const ProfessionalSchema = new Schema(
   }
 );
 
-ProfessionalSchema.pre('save', async function save(next) {
+ProfessionalSchema.pre("save", async function save(next) {
   const professional = this;
 
   try {
-    if (!professional.isModified('password')) {
+    if (!professional.isModified("password")) {
       next();
     }
     const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
@@ -103,18 +102,21 @@ ProfessionalSchema.pre('save', async function save(next) {
 });
 
 ProfessionalSchema.methods.comparePassword = async function comparepassword(
-	enteredPassword,
-	next
+  enteredPassword,
+  next
 ) {
-	const professional = this;
+  const professional = this;
 
-	try {
-		const isMatch = await bcrypt.compare(enteredPassword, professional.password);
-		return isMatch;
-	} catch (e) {
-		next(e);
-		return false;
-	}
+  try {
+    const isMatch = await bcrypt.compare(
+      enteredPassword,
+      professional.password
+    );
+    return isMatch;
+  } catch (e) {
+    next(e);
+    return false;
+  }
 };
 
 export default models.Professional || model("Professional", ProfessionalSchema);
