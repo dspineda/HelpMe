@@ -1,20 +1,27 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/Sign-up-professional.module.scss";
 
 export default function SignUpProfessional() {
   const [form, setForm] = useState({});
+  const [service, setService] = useState({});
+  const [formToSend, setFormToSend] = useState({});
+
+  useEffect(() => {
+    setFormToSend({ name: service, professional: form });
+  }, [service, form]);
+
   const newProfessional = async () => {
     const professional = await fetch("/api/auth/users/register-professional", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(formToSend),
     });
     const data = await professional.json();
     console.log(
-      "🚀 ~ file: professional.jsx ~ line 16 ~ newProfessional ~ data",
+      "🚀 ~ file: professional.jsx ~ line 17 ~ newProfessional ~ data",
       data
     );
   };
@@ -24,7 +31,11 @@ export default function SignUpProfessional() {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });    
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleService = (e) => {
+    setService(e.target.value);
   };
   return (
     <div className={styles.container}>
@@ -117,7 +128,30 @@ export default function SignUpProfessional() {
               />
             </div>
             <div className={styles.form__input}>
-              <label htmlFor="address">Describe your profile</label>
+              <label htmlFor="address">Services</label>
+              <select
+                id="cars"
+                name="services"
+                form="carform"
+                onChange={handleService}
+              >
+                <option value="DEFAULT" disabled>
+                  Select your service
+                </option>
+                <option value="Home appliances expert">
+                  Home appliances expert
+                </option>
+                <option value="Home automation expert">
+                  Home automation expert
+                </option>
+                <option value="Builder, plumber, painter">
+                  Builder, plumber, painter
+                </option>
+                <option value="Electrician">Electrician</option>
+              </select>
+            </div>
+            <div className={styles.form__input}>
+              <label htmlFor="address">Describe your service</label>
               <input
                 type="text"
                 name="description"
@@ -125,20 +159,6 @@ export default function SignUpProfessional() {
                 placeholder="Description"
                 onChange={handleChange}
               />
-            </div>
-            <div className={styles.form__input}>
-              <label htmlFor="address">Services</label>
-              <select
-                id="cars"
-                name="services"
-                form="carform"
-                onChange={handleChange}
-              >
-                <option value="Home appliances expert">Home appliances expert</option>
-                <option value="Home automation expert">Home automation expert</option>
-                <option value="Builder, plumber, painter">Builder, plumber, painter</option>
-                <option value="Electrician">Electrician</option>
-              </select>
             </div>
             {/*<div className={styles.form__input}>
               <label htmlFor="address">Profile photo</label>

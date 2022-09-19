@@ -7,8 +7,9 @@ import {sendMailSendGrid} from "../../../../utils/mail";
 export default async function handler(req, res) {
   await dbConnect();
   const userData = req.body;
-  const userFound = await findProfessionalByEmail(userData.email);
-
+  const userFound = await findProfessionalByEmail(userData.professional.email);
+  console.log("🚀 ~ file: register-professional.js ~ line 11 ~ handler ~ userFound", userFound)
+ 
   if (userFound) {
     return res.status(400).json({ message: "User already exists" });
   }
@@ -16,16 +17,16 @@ export default async function handler(req, res) {
   try {
     const hash = crypto
       .createHash("sha256")
-      .update(userData.email)
+      .update(userData.professional.email)
       .digest("hex");
-      userData.passwordResetActivationToken = hash;
-      userData.passwordResetActivationExpires = Date.now() + 3_600_000 * 24; // 24 hour
+      userData.professional.passwordResetActivationToken = hash;
+      userData.professional.passwordResetActivationExpires = Date.now() + 3_600_000 * 24; // 24 hour
 
     const professional = await createProfessional(userData);
     // Send email to professional
     const emailData = {
       from: '"no-reply" <dspinedao@outlook.com>',
-      to: userData.email,
+      to: userData.professional.email,
       subject: "Welcome to HelpMe!!",
       preheader: 'Activate your Account Now.',
       template_id: 'd-8e132668b8f7429ea99a743ed92f30e6',

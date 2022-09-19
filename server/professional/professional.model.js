@@ -40,11 +40,6 @@ const ProfessionalSchema = new Schema(
       type: String,
       //required: true,
     },
-    services: {
-      type: Schema.Types.ObjectId,
-      ref: "Service",
-    },
-
     certificates: [
       {
         name: {
@@ -85,6 +80,22 @@ const ProfessionalSchema = new Schema(
   }
 );
 
+const ServiceSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    professional: [ProfessionalSchema],
+  },
+  {
+    timestamps: true,
+  }
+);
+
 ProfessionalSchema.pre("save", async function save(next) {
   const professional = this;
 
@@ -94,8 +105,9 @@ ProfessionalSchema.pre("save", async function save(next) {
     }
     const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
     const hash = await bcrypt.hash(professional.password, salt);
-
+    console.log("🚀 ~ file: professional.model.js ~ line 108 ~ save ~ hash", hash)
     professional.password = hash;
+    
   } catch (e) {
     next(e);
   }
@@ -119,4 +131,12 @@ ProfessionalSchema.methods.comparePassword = async function comparepassword(
   }
 };
 
-export default models.Professional || model("Professional", ProfessionalSchema);
+export default models.Service || model("Service", ServiceSchema);
+
+//export default models.Professional || model("Professional", ProfessionalSchema);
+
+
+/*professional: {
+  type: Schema.Types.ObjectId,
+  ref: "Professional",
+}*/

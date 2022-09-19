@@ -2,19 +2,28 @@ import { findProfessionalByEmail } from "../../../../../server/professional/prof
 import { signToken } from "../../../../../server/auth/auth.service";
 import dbConnect from "../../../../../server/config/database";
 
-
-export default async function loginProf(req, res) {
-await dbConnect();
+export default async function loginProfessional(req, res) {
+  await dbConnect();
   const { email, password } = req.body;
   const professional = await findProfessionalByEmail(email);
-    try{
-    if (!professional) {
+  if (!professional) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  const filterEmail = professional.professional.filter(
+    (item) => item.email === email
+  );
+  try {
+    if (!filterEmail) {
       return res.status(400).json({ message: "User does not exist" });
     }
-    if (!professional.isActivated) {
+    if (!filterEmail[0].isActivated) {
+      console.log(
+        "🚀 ~ file: login-professional.js ~ line 17 ~ loginProfessional ~ filterEmail.isActivated",
+        filterEmail.isActivated
+      );
       return res.status(400).json({ message: "User is not activated" });
     }
-    const isMatch = await professional.comparePassword(password);
+    const isMatch = await filterEmail[0].comparePassword(password);
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
@@ -24,4 +33,3 @@ await dbConnect();
     return res.status(500).json({ message: "Internal server error" });
   }
 }
-
