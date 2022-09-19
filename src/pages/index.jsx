@@ -1,13 +1,14 @@
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
-    const router = useRouter();
-  const signUpProfessional =  () => {
+  const router = useRouter();
+  const signUpProfessional = () => {
     router.push("/sign-up/professional");
   };
 
@@ -131,13 +132,19 @@ export default function Home() {
             companies that seek to provide faster services and solutions to
             people in their homes. Achieving that independent workers get more
             work. If you want to be part of this network and be known in your
-            area, start your registration so that hundreds of people can call you
-            and hire you.
+            area, start your registration so that hundreds of people can call
+            you and hire you.
           </p>
         </div>
-        <button className={styles.about__button} onClick={signUpProfessional} >
+        <button className={styles.about__button} onClick={signUpProfessional}>
           <a>Register Form</a>
         </button>
+        <div className={styles.about__login}>
+          <p>
+            Already have an account?{" "}
+            <Link href="/login/professional">Login</Link>
+          </p>
+        </div>
       </section>
       <Footer />
     </div>
