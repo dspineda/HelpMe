@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 
 const { SALT_ROUNDS } = process.env;
 
@@ -61,7 +61,7 @@ const ProfessionalSchema = new Schema(
     },
     image: {
       type: String,
-      //required: true,
+      default: "https://res.cloudinary.com/davpin/image/upload/v1663655726/HelpMe%20images/habitos-laborales-tecnico-electricista_vjmtzj.jpg",
     },
     createdAt: {
       type: Date,
@@ -70,6 +70,9 @@ const ProfessionalSchema = new Schema(
     isActivated: {
       type: Boolean,
       default: false,
+    },
+    comments: {
+      type: String,
     },
     passwordResetActivationToken: String,
     passwordResetActivationExpires: Date,
@@ -96,23 +99,6 @@ const ServiceSchema = new Schema(
   }
 );
 
-ProfessionalSchema.pre("save", async function save(next) {
-  const professional = this;
-
-  try {
-    if (!professional.isModified("password")) {
-      next();
-    }
-    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
-    const hash = await bcrypt.hash(professional.password, salt);
-    console.log("🚀 ~ file: professional.model.js ~ line 108 ~ save ~ hash", hash)
-    professional.password = hash;
-    
-  } catch (e) {
-    next(e);
-  }
-});
-
 ProfessionalSchema.methods.comparePassword = async function comparepassword(
   enteredPassword,
   next
@@ -132,11 +118,3 @@ ProfessionalSchema.methods.comparePassword = async function comparepassword(
 };
 
 export default models.Service || model("Service", ServiceSchema);
-
-//export default models.Professional || model("Professional", ProfessionalSchema);
-
-
-/*professional: {
-  type: Schema.Types.ObjectId,
-  ref: "Professional",
-}*/

@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
 
 .container{
+  color: black;
+  ul {
+    list-style: none;
+    padding: 0;
+  }
   .header{
     display: flex;
     justify-content: center;
@@ -29,24 +34,35 @@
   .info__services{
     text-align: left;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     background: #E5E5E5;
-    height: 100vh;
-    .info__services__paint{
-      width: 280px;
-      height: 360px;
+    height: auto;
+    h3{
+      margin: 0;
+    }
+    .info__list{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      
+    }
+    .info__services__users{
+      width: 350px;
+      height: auto;
       padding: 30px;
-      margin-bottom: 80px;
       background: white; 
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border:solid 1px #F1C50E;
       h4{
         margin-top: 0;
       }
-      .info__services__paint__title{
+      .info__services__users__name{
         color:#F1C50E;
         font-size: 24px;
         font-family: 'Oswald', sans-serif;
       }
-      .info__services__paint__paragraph{
+      .info__services__users__description{
         color: #808080;
         font-family: 'Raleway', sans-serif;
         font-size: 18px;

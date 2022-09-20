@@ -1,5 +1,6 @@
 import dbConnect from "../../../../../server/config/database";
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 import { createProfessional, findProfessionalByEmail } from "../../../../../server/professional/professional.service";
 import {sendMailSendGrid} from "../../../../utils/mail";
 
@@ -22,6 +23,12 @@ export default async function handler(req, res) {
       userData.professional.passwordResetActivationToken = hash;
       userData.professional.passwordResetActivationExpires = Date.now() + 3_600_000 * 24; // 24 hour
 
+      const salt = await bcrypt.genSalt();
+      const hash2 = await bcrypt.hash(userData.professional.password, salt);
+      console.log("🚀 ~ file: register-professional.js ~ line 28 ~ handler ~ hash2", hash2)
+
+      userData.professional.password = hash2;
+      
     const professional = await createProfessional(userData);
     // Send email to professional
     const emailData = {

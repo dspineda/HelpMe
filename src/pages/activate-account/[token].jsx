@@ -12,7 +12,6 @@ export default function ActivateAccount() {
         "Content-Type": "application/json",
       },
     });
-    
     const data = await response.json();
     if (data.token) {
       localStorage.setItem("token", data.token);

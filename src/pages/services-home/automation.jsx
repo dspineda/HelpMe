@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../styles/Manto-electro.module.scss";
+import styles from "../../styles/Manto-electro.module.scss";
 
 export default function About() {
   return (
@@ -7,14 +7,14 @@ export default function About() {
       <section className={styles.header}>
         <div className={styles.header__img1}>
           <Image
-            src="/img/paint-roller.png"
-            width={90}
-            height={90}
+            src="/img/smart-bulb.png"
+            width={100}
+            height={100}
             alt="Imagen Home"
           ></Image>
         </div>
         <div className={styles.header__title}>
-          <h1>Reparaciones Domésticas</h1>
+          <h1>HOME APPLIANCE REPAIR</h1>
         </div>
       </section>
       <section className={styles.info__services}>

@@ -18,7 +18,7 @@
 						font-family: 'Oswald', sans-serif;
 						margin-left: 15px;
 						margin-top: 25px;
-						margin-right: auto;
+						padding-right: 30px;
 				}
 				.foooter__social__img{
 					width: 25px;
@@ -27,8 +27,7 @@
 					margin-top: 30px;
 					border-radius: 50%;
 				}
-				.foooter__social__img__end{
-					margin-right: 15px;
+				.foooter__social__img__init{
 					width: 25px;
 					height: 25px;
 					margin-left: 20px;
@@ -43,7 +42,7 @@
 						background: #F1C50E;
 						border-radius: 50%;
 				}
-				.foooter__social__img__end:hover{
+				.foooter__social__img__init:hover{
 					cursor: pointer;
 					transform: scale(1.3);
 					transition: .3s;
