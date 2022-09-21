@@ -1,39 +1,65 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "../../../styles/ProfileProfessional.module.scss";
+import { useEffect, useState } from "react";
+import Navbar from "../../../components/Navbar";
 
 export default function ProfileProfessional() {
+  const [profile, setProfile] = useState([]);
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(`/api/maintance/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+
+      setProfile(data);
+    };
+    getProfile();
+  }, [id]);
+
   return (
+    <div>
+    <Navbar />
     <div className={styles.container}>
       <section className={styles.section1}>
         <div className={styles.section1__container}>
           <div className={styles.section1__yellow}></div>
           <div className={styles.section1__photo}>
+            <img
+              src={profile[0]?.image}
+              alt="Profile Photo"
+              style={{ width: "100%", height: "100%" }}
+            ></img>
           </div>
         </div>
       </section>
       <section className={styles.section2}>
         <div className={styles.section2__name}>
-          <h1>Name Last Name</h1>
+          <h1>
+            {profile[0]?.firstName} {profile[0]?.lastName}
+          </h1>
         </div>
         <div className={styles.section2__description}>
+          <p>{profile[0]?.description}</p>
           <p>
-            ou are now part of the HelpMe community. Add more information to
-            your profile so more people will call you quickly ou are now part of
-            the HelpMe community. Add more information to your profile so more
-            people will call you quickly
+            <strong>email:</strong> {profile[0]?.email}
           </p>
           <p>
-            <strong>email:</strong>
+            <strong>phone:</strong> {profile[0]?.phone}
           </p>
           <p>
-            <strong>phone:</strong>
+            <strong>city: </strong> {profile[0]?.city}
           </p>
           <p>
-            <strong>city:</strong>
-          </p>
-          <p>
-            <strong>address:</strong>
+            <strong>address: </strong> {profile[0]?.address}
           </p>
           <p>
             <strong>certificates:</strong>
@@ -46,6 +72,7 @@ export default function ProfileProfessional() {
           </p>
         </div>
       </section>
+    </div>
     </div>
   );
 }

@@ -2,11 +2,6 @@ import Service from "./professional.model";
 import Professional from "./professional.model";
 
 export const createProfessional = async (serviceData) => {
-  const a = serviceData.name;
-  console.log(
-    "🚀 ~ file: professional.service.js ~ line 6 ~ createProfessional ~  a ",
-    a
-  );
   try {
     const findNameService = await Service.findOne({ name: serviceData.name });
     if (!findNameService) {
@@ -72,12 +67,29 @@ export const findProfessionalElectrician = async () => {
 };
 
 export const findProfessionalById = async(id) => {
-  console.log("🚀 ~ file: professional.service.js ~ line 84 ~ findProfessionalById ~ id", id)
+  const resultProfessional = []
   try {
-    const professional = await Service.findOne({
+    const result = await Service.findOne({
       "professional._id": id,
     });
-    return professional;
+
+    for (let index = 0; index <= result.professional.length; index++) {
+      if (result.professional[index].id === id) {
+        const data = {
+          id: result.professional[index].id,
+          firstName: result.professional[index].firstName,
+          lastName: result.professional[index].lastName,
+          phone: result.professional[index].phone,
+          address: result.professional[index].address,
+          city:result.professional[index].city,
+          description: result.professional[index].description,
+          email: result.professional[index].email,
+          image: result.professional[index].image,
+        }
+        resultProfessional.push(data)
+        return resultProfessional;
+      }
+      }
   } catch (error) {
     throw new Error(error);
   }

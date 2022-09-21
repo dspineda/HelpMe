@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../../styles/ProfileProfessional.module.scss";
+import styles from "../../../../styles/ProfileProfessional.module.scss";
 
 export default function ProfileProfessional() {
   return (

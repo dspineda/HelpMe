@@ -1,10 +1,18 @@
 import Image from "next/image";
+import Navbar from "../../components/Navbar";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import styles from "../../styles/Electrician.module.scss";
 
 export default function ServiceElectrician() {
+  const router = useRouter();
   const [data, setData] = useState([]);
+
+  const handleDetail = id => {
+    router.push(`/profile/professional/${id}`)
+  }
+
   useEffect(() => {
     const getAllElectrician = async () => {
       const response = await fetch("/api/maintance/electrician", {
@@ -14,21 +22,15 @@ export default function ServiceElectrician() {
         },
       });
       setData(await response.json());
+      console.log("🚀 ~ file: electrician.jsx ~ line 25 ~ getAllElectrician ~ response", response)
     };
     getAllElectrician();
   }, []);
 
   return (
     <div className={styles.container}>
+    <Navbar />
       <section className={styles.header}>
-        <div className={styles.header__img1}>
-          <Image
-            src="/img/home.png"
-            width={100}
-            height={100}
-            alt="Imagen Home"
-          ></Image>
-        </div>
         <div className={styles.header__title}>
           <h1>HOME APPLIANCE REPAIR</h1>
         </div>
@@ -56,7 +58,7 @@ export default function ServiceElectrician() {
                     <p>{data.description}</p>
                   </div>
                   <p>{data.city}</p>
-                  <button className={styles.info__services__users__button}>
+                  <button className={styles.info__services__users__button} onClick={() => handleDetail(data.id)}>
                     Contact
                   </button>
                 </li>
