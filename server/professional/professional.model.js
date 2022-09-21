@@ -1,7 +1,6 @@
 import { Schema, model, models } from "mongoose";
 import bcrypt from 'bcryptjs';
 
-const { SALT_ROUNDS } = process.env;
 
 const ProfessionalSchema = new Schema(
   {
@@ -40,6 +39,12 @@ const ProfessionalSchema = new Schema(
       type: String,
       //required: true,
     },
+    notifications: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Notification",
+      },
+    ],
     certificates: [
       {
         name: {

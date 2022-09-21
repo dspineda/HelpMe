@@ -6,7 +6,8 @@ import { sendMailSendGrid } from "../../../utils/mail";
 export default async function handler(req, res) {
   await dbConnect();
   const { id } = req.query;
-  const { email, name, message,date } = req.body;
+  const { email, name, message, date, time } = req.body;
+  
 
   try {
     let professional = await findProfessionalById(id);
@@ -22,11 +23,10 @@ export default async function handler(req, res) {
       preheader: 'Activate your Account Now.',
       template_id: 'd-cfda2e51608d49d79d3e4093e12d9872',
       dynamic_template_data: {
-        name: name,
-        email: email,
-        message: message,
-        date: date,
-
+        name,
+        message,
+        date,
+        time,
       },
     }
 

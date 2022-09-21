@@ -49,6 +49,24 @@
       font-size: 16px;
       font-family: 'Oswald', sans-serif; 
     }
+    .section2__button{
+      button{
+        background: #EAC60B;
+        width: 250px;
+        height: 60px;
+        font-size: 25px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        border: none ;
+        padding-bottom: 0;
+        margin-bottom: 10px;
+        margin-left: 50px;
+      }
+      button:hover{
+        background: rgb(240, 207, 45);
+      }
+    }
+
   }
 }
 
@@ -103,6 +121,23 @@
         width: 500px;
         font-size: 16px;
         font-family: 'Oswald', sans-serif; 
+      }
+      .section2__button{
+        button{
+          background: #EAC60B;
+          width: 250px;
+          height: 60px;
+          font-size: 25px;
+          cursor: pointer;
+          letter-spacing: 1px;
+          border: none ;
+          padding-bottom: 0;
+          margin-bottom: 10px;
+          margin-left: 250px;
+        }
+        button:hover{
+          background: rgb(240, 207, 45);
+        }
       }
     }
   }

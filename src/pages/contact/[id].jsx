@@ -1,46 +1,109 @@
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/Contact.module.scss";
 
 export default function Contact() {
-  const [startDate, setStartDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+  const [form, setForm] = useState({});
+  const [formToSend, setFormToSend] = useState({});
+  const router = useRouter();
+  const { id } = router.query;
 
+  useEffect(() => {
+    const allData = {
+      ...form,
+      date: date.toDateString(),
+      time: date.toTimeString(),
+    };
+    setFormToSend(allData);
+  }, [date, time, form]);
+
+  const newNotification = async () => {
+    const notification = await fetch(`/api/notifications/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formToSend),
+    });
+    const response = await notification.json();
+    console.log(
+      "🚀 ~ file: [id].jsx ~ line 31 ~ newNotification ~ response",
+      response
+    );
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    newNotification();
+  };
+
+  const handleChange = (e) => {
+    setDate(date);
+    setTime(date);
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleDate = (date) => {
+    setDate(date);
+    setTime(date);
+  };
+
+  const handleHome = () => {
+    router.push("/");
+  };
 
   return (
-    <div>
-      <form className={styles.form}>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleSend}>
         <div className={styles.form__title}>
           <h1>Contact</h1>
         </div>
         <div className={styles.form__input}>
           <div>
             <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="Name" />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Email" />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label htmlFor="message">Message</label>
             <textarea
               name="message"
               id="message"
-              cols="30"
-              rows="10"
+              cols="500"
+              rows="20"
               placeholder="Message"
+              onChange={handleChange}
             ></textarea>
           </div>
-          <label htmlFor="name">Date</label>
+          <label htmlFor="name">Visit Date</label>
           <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            selected={date}
+            onChange={handleDate}
             showTimeSelect
             dateFormat="Pp"
           />
-
-          <button type="submit">Submit</button>
+          <div className={styles.form__button}>
+            <button type="submit" onClick={handleHome}>Submit</button>
+          </div>
         </div>
       </form>
     </div>

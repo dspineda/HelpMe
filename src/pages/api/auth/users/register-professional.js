@@ -25,7 +25,6 @@ export default async function handler(req, res) {
 
       const salt = await bcrypt.genSalt();
       const hash2 = await bcrypt.hash(userData.professional.password, salt);
-      console.log("🚀 ~ file: register-professional.js ~ line 28 ~ handler ~ hash2", hash2)
 
       userData.professional.password = hash2;
       
