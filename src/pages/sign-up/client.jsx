@@ -1,6 +1,6 @@
-import styles from "../styles/Register.module.scss";
+import styles from "../../styles/Sign-up-client.module.scss";
 
-export default function Register() {
+export default function SignUpClient() {
   return (
     <div className={styles.container}>
       <form className={styles.form}>
@@ -37,3 +37,5 @@ export default function Register() {
     </div>
   );
 }
+
+

@@ -6,8 +6,6 @@ export default async function handle(req, res) {
   const { id } = req.query;
   try {
     let electrician = await findProfessionalById(id);
-    console.log("🚀 ~ file: [id].js ~ line 10 ~ findElectricianById ~ electrician", electrician)
-  
     if (!electrician) {
       console.log("Invalid id");
       return res.status(400).json({ message: "Invalid id" });

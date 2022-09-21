@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
+import NavbarInListProfessionals from "../../components/NavbarInListProfessionals";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -9,9 +9,9 @@ export default function ServiceElectrician() {
   const router = useRouter();
   const [data, setData] = useState([]);
 
-  const handleDetail = id => {
-    router.push(`/profile/professional/${id}`)
-  }
+  const handleDetail = (id) => {
+    router.push(`/profile/professional/${id}`);
+  };
 
   useEffect(() => {
     const getAllElectrician = async () => {
@@ -22,17 +22,27 @@ export default function ServiceElectrician() {
         },
       });
       setData(await response.json());
-      console.log("🚀 ~ file: electrician.jsx ~ line 25 ~ getAllElectrician ~ response", response)
+      console.log(
+        "🚀 ~ file: electrician.jsx ~ line 25 ~ getAllElectrician ~ response",
+        response
+      );
     };
     getAllElectrician();
   }, []);
 
   return (
     <div className={styles.container}>
-    <Navbar />
+      <section className={styles.header__img1}>
+        <Image
+          src="/img/about.png"
+          width={1880}
+          height={613}
+          alt="Imagen Home"
+        ></Image>
+      </section>
       <section className={styles.header}>
         <div className={styles.header__title}>
-          <h1>HOME APPLIANCE REPAIR</h1>
+          <h1>Electrician</h1>
         </div>
       </section>
       <section className={styles.info__services}>
@@ -50,23 +60,28 @@ export default function ServiceElectrician() {
                     ></Image>
                   </div>
                   <div className={styles.info__services__users__name}>
-                    <h3>
-                      {data.firstName} {data.lastName}
-                    </h3>
+                    <button
+                      className={styles.info__services__users__button}
+                      onClick={() => handleDetail(data.id)}
+                    >
+                      <h3>
+                        {data.firstName} {data.lastName}
+                      </h3>
+                    </button>
                   </div>
                   <div className={styles.info__services__users__description}>
                     <p>{data.description}</p>
                   </div>
-                  <p>{data.city}</p>
-                  <button className={styles.info__services__users__button} onClick={() => handleDetail(data.id)}>
-                    Contact
-                  </button>
+                  <div className={styles.info__services__users__city}>
+                    <p>{data.city}</p>
+                  </div>
                 </li>
               ) : null
             )}
           </ul>
         </div>
       </section>
+      <NavbarInListProfessionals />
     </div>
   );
 }
