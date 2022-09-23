@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Sign-up-professional.module.scss";
 
 export default function SignUpProfessional() {
+  const [image, setImage] = useState("")
   const [form, setForm] = useState({});
   const [service, setService] = useState({});
   const [formToSend, setFormToSend] = useState({});
-
   useEffect(() => {
+    const newObje = Object.assign(form, {photo:image})
     setFormToSend({ name: service, professional: form });
-  }, [service, form]);
+  }, [service, form, image]);
 
   const newProfessional = async () => {
     const professional = await fetch("/api/auth/users/register-professional", {
@@ -31,12 +32,33 @@ export default function SignUpProfessional() {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value});
   };
 
   const handleService = (e) => {
     setService(e.target.value);
   };
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "miscargas");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/davpin/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage(file.secure_url);
+    console.log("🚀 ~ file: professional.jsx ~ line 60 ~ uploadImage ~ file.secure_url", file.secure_url)
+  };
+  
+
+
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSignUp}>
@@ -93,6 +115,14 @@ export default function SignUpProfessional() {
                 id="confirmPassword"
                 placeholder="Confirm Password"
                 onChange={handleChange}
+              />
+            </div>
+            <div className={styles.form__input}>
+              <label htmlFor="photo">Photo </label>
+              <input
+                type="file"
+                name="file"
+                onChange={uploadImage}
               />
             </div>
           </section>
@@ -160,20 +190,16 @@ export default function SignUpProfessional() {
                 onChange={handleChange}
               />
             </div>
-            {/*<div className={styles.form__input}>
-              <label htmlFor="address">Profile photo</label>
-              <input type="file" id="myPhoto" name="filename" />
-            </div>
             <div className={styles.form__input}>
               <label htmlFor="certificates">Certificates</label>
               <input
                 type="file"
                 id="myFiles"
-                name="filename"
+                name="certificates"
                 multiple
                 accept="image/*"
               />
-            </div>*/}
+            </div>
           </section>
         </div>
         <div className={styles.form__input}>

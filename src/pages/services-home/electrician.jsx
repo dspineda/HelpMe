@@ -22,10 +22,9 @@ export default function ServiceElectrician() {
         },
       });
       setData(await response.json());
-      console.log(
-        "🚀 ~ file: electrician.jsx ~ line 25 ~ getAllElectrician ~ response",
-        response
-      );
+      console.log("🚀 ~ file: electrician.jsx ~ line 25 ~ getAllElectrician ~ Data", data)
+      
+      
     };
     getAllElectrician();
   }, []);
@@ -53,7 +52,7 @@ export default function ServiceElectrician() {
                 <li key={data.id} className={styles.info__services__users}>
                   <div className={styles.info__services__users__img}>
                     <Image
-                      src={data.image}
+                      src={data?.photo}
                       width={277}
                       height={213}
                       alt="Service Paint"

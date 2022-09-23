@@ -64,7 +64,7 @@ const ProfessionalSchema = new Schema(
       type: Number,
       //required: true,
     },
-    image: {
+    photo: {
       type: String,
       default: "https://res.cloudinary.com/davpin/image/upload/v1663655726/HelpMe%20images/habitos-laborales-tecnico-electricista_vjmtzj.jpg",
     },
@@ -74,7 +74,7 @@ const ProfessionalSchema = new Schema(
     },
     isActivated: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     comments: {
       type: String,
@@ -122,4 +122,9 @@ ProfessionalSchema.methods.comparePassword = async function comparepassword(
   }
 };
 
-export default models.Service || model("Service", ServiceSchema);
+const Service = models.Service || model("Service", ServiceSchema);
+const Professional = models.Professional || model("Professional", ProfessionalSchema);
+
+export { Service, Professional };
+
+//export default models.Service || model("Service", ServiceSchema);

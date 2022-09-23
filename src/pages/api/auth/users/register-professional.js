@@ -8,6 +8,7 @@ import {sendMailSendGrid} from "../../../../utils/mail";
 export default async function handler(req, res) {
   await dbConnect();
   const userData = req.body;
+  console.log("🚀 ~ file: register-professional.js ~ line 11 ~ handler ~ userData", userData)
   const userFound = await findProfessionalByEmail(userData.professional.email);
   console.log("🚀 ~ file: register-professional.js ~ line 11 ~ handler ~ userFound", userFound)
  
@@ -42,7 +43,7 @@ export default async function handler(req, res) {
         url: `http://localhost:3000/activate-account/${hash}`,
       },
     };
-    await sendMailSendGrid(emailData);
+    //await sendMailSendGrid(emailData);
     console.log('User created successfully', professional);
     return res.status(200).json({ message: 'User created successfully' });
   } catch (error) {

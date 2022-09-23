@@ -34,6 +34,8 @@ export default function Contact() {
       "🚀 ~ file: [id].jsx ~ line 31 ~ newNotification ~ response",
       response
     );
+    router.push("/");
+
   };
 
   const handleSend = (e) => {
@@ -52,9 +54,6 @@ export default function Contact() {
     setTime(date);
   };
 
-  const handleHome = () => {
-    router.push("/");
-  };
 
   return (
     <div className={styles.container}>
@@ -94,6 +93,26 @@ export default function Contact() {
               onChange={handleChange}
             ></textarea>
           </div>
+          <div>
+            <label htmlFor="city">City</label>
+            <input
+              type="text"
+              name="city"
+              id="city"
+              placeholder="City"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Address"
+              onChange={handleChange}
+            />
+          </div>
           <label htmlFor="name">Visit Date</label>
           <DatePicker
             selected={date}
@@ -102,7 +121,7 @@ export default function Contact() {
             dateFormat="Pp"
           />
           <div className={styles.form__button}>
-            <button type="submit" onClick={handleHome}>Submit</button>
+            <button type="submit" >Submit</button>
           </div>
         </div>
       </form>

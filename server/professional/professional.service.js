@@ -1,5 +1,5 @@
-import Service from "./professional.model";
-import Professional from "./professional.model";
+import {Service} from "./professional.model";
+
 
 export const createProfessional = async (serviceData) => {
   try {
@@ -56,7 +56,7 @@ export const findProfessionalElectrician = async () => {
          city: service.professional[index].city,
          description: service.professional[index].description,
          isActivated: service.professional[index].isActivated,
-         image: service.professional[index].image,
+         photo: service.professional[index].photo,
     }
       resultAll.push(data)
     } 
@@ -84,7 +84,8 @@ export const findProfessionalById = async(id) => {
           city:result.professional[index].city,
           description: result.professional[index].description,
           email: result.professional[index].email,
-          image: result.professional[index].image,
+          photo: result.professional[index].photo,
+          notifications: result.professional[index].notifications,
         }
         resultProfessional.push(data)
         return resultProfessional;
@@ -94,4 +95,14 @@ export const findProfessionalById = async(id) => {
     throw new Error(error);
   }
 };
+/*
+export const findProfessionalsByServices = async (id) => {
+  try {
+    const professional = await Service.findOne({ "professional._id": id });
+    return professional;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
+*/
