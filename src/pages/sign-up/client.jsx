@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "../../styles/Sign-up-client.module.scss";
 
 export default function SignUpClient() {
@@ -31,7 +32,7 @@ export default function SignUpClient() {
           <button type="submit">Submit</button>
         </div>
         <div className={styles.form__input}>
-          <p>Already have an account? <a href="#">Login</a></p>
+          <p>Already have an account? <Link href="/login/client">Login</Link></p>
         </div>
       </form>
     </div>

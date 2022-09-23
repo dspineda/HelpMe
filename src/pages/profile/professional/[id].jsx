@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import styles from "../../../styles/ProfileProfessional.module.scss";
 import { useEffect, useState } from "react";
 import Navbar from "../../../components/Navbar";
+import NotFound from "../../../components/NotFound";
+import { useSession } from "next-auth/react";
 
 export default function ProfileProfessional() {
   const [profile, setProfile] = useState([]);
@@ -13,6 +15,7 @@ export default function ProfileProfessional() {
   const [inProcess, setInProcess] = useState([]);
   const router = useRouter();
   const { id } = router.query;
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const getProfile = async () => {
@@ -52,6 +55,7 @@ export default function ProfileProfessional() {
   };
 
   return (
+    <>{session ?(
     <div>
       <div className={styles.container}>
         <section className={styles.section1}>
@@ -141,5 +145,7 @@ export default function ProfileProfessional() {
       </div>
       <Navbar />
     </div>
+    ): <NotFound />} 
+    </>
   );
 }

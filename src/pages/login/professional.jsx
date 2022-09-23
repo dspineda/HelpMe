@@ -17,8 +17,8 @@ export default function LoginProfessional() {
     const data = await professional.json();
     if (data.token) {
       if (data.token) {
-        localStorage.setItem("token", data.token);
-        router.push("/");
+         localStorage.setItem("token", data.token);
+         router.push(`/login/professional/${data.id}`);
       } else {
         alert(Fallo);
       }

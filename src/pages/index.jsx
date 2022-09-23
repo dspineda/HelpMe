@@ -2,16 +2,58 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const router = useRouter();
+
+  if (status === "loading") {
+    return (
+      <div className={styles.container}>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+
   const signUpProfessional = () => {
     router.push("/sign-up/professional");
   };
 
+  const routerElectrician = () => {
+    if(session){
+      router.push("services-home/electrician");
+    }else{
+      router.push("/login/client");
+    }
+  };
+
+  const routerBuilder = () => {
+    if(session){
+      router.push("services-home/builder");
+    }else{
+      router.push("/login/client");
+    }
+  }
+
+  const routerSmartHome = () => {
+    if(session){
+      router.push("services-home/automation");
+    }else{
+      router.push("/login/client");
+    }
+  }
+
+  const routerAppliances = () => {
+    if(session){
+      router.push("services-home/appliances");
+    }else{
+      router.push("/login/client");
+    }
+  }
   return (
     <div className={styles.container}>
       <Navbar />
@@ -45,7 +87,7 @@ export default function Home() {
         </section>
       </div>
       <div className={styles.content}>
-        <button className={styles.homeCleaning}>
+        <button className={styles.homeCleaning}onClick={routerAppliances} >
           <div className={styles.homeCleaning__img}>
             <Image
               src="/img/electrodo.png"
@@ -64,7 +106,7 @@ export default function Home() {
             </p>
           </div>
         </button>
-        <button className={styles.smartHome}>
+        <button className={styles.smartHome} onClick={routerSmartHome}>
           <div className={styles.smartHome__img}>
             <Image
               src="/img/smart-bulb.png"
@@ -83,7 +125,7 @@ export default function Home() {
             </p>
           </div>
         </button>
-        <button className={styles.interiorPaintin}>
+        <button className={styles.interiorPaintin} onClick={routerBuilder}>
           <div className={styles.interiorPaintin__img}>
             <Image
               src="/img/paint-roller.png"
@@ -102,7 +144,7 @@ export default function Home() {
             </p>
           </div>
         </button>
-        <button className={styles.lightFixures}>
+        <button className={styles.lightFixures} onClick={routerElectrician}>
           <div className={styles.lightFixures__img}>
             <Image
               src="/img/home.png"

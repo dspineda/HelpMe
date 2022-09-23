@@ -12,23 +12,21 @@ export default async function loginProfessional(req, res) {
   const filterEmail = professional.professional.filter(
     (item) => item.email === email
   );
+  const id= filterEmail[0]._id
   try {
     if (!filterEmail) {
       return res.status(400).json({ message: "User does not exist" });
     }
     if (!filterEmail[0].isActivated) {
-      console.log(
-        "🚀 ~ file: login-professional.js ~ line 17 ~ loginProfessional ~ filterEmail.isActivated",
-        filterEmail.isActivated
-      );
       return res.status(400).json({ message: "User is not activated" });
     }
     const isMatch = await filterEmail[0].comparePassword(password);
+
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
     const token = await signToken({ email: professional.email });
-    return res.status(220).json({ token });
+    return res.status(220).json({ token, id });
   } catch (e) {
     return res.status(500).json({ message: "Internal server error" });
   }
