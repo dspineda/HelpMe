@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
+
+
+.footer{
+    background: rgb(8, 8, 8);
+    box-shadow: 25px 10px 8px 10px #5c5959;
+    height: 20vh;
+    .footer__social{
+        display: flex;
+				h3{
+					margin: 0;
+					padding: 0;
+				}
+        .foooter__social__followme{
+            font-size: 1.5rem;
+            color: #5c5959;
+						font-family: 'Oswald', sans-serif;
+						margin-left: 15px;
+						margin-top: 25px;
+						padding-right: 30px;
+				}
+				.foooter__social__img{
+					width: 25px;
+					height: 25px;
+					margin-left: 20px;
+					margin-top: 30px;
+					border-radius: 50%;
+				}
+				.foooter__social__img__init{
+					width: 25px;
+					height: 25px;
+					margin-left: 20px;
+					margin-top: 30px;
+					border-radius: 50%;
+
+				}
+				.foooter__social__img:hover{
+						cursor: pointer;
+						transform: scale(1.3);
+						transition: .3s;
+						background: #F1C50E;
+						border-radius: 50%;
+				}
+				.foooter__social__img__init:hover{
+					cursor: pointer;
+					transform: scale(1.3);
+					transition: .3s;
+					background: #F1C50E;
+					border-radius: 50%;
+				}
+    }
+}
+
+.footer__copyright{
+    font-size: 1.2rem;
+    text-align: center;
+    p{
+        font-family: 'Oswald', sans-serif;
+        color: #656464;
+    }
+}
+
+@media (min-width: 768px){
+	.footer{
+    .footer__social{
+        .foooter__social__followme{
+						margin-left: 100px;
+				}
+				.foooter__social__img__end{
+					margin-right: 100px;
+				}
+    }
+}
+}
+
