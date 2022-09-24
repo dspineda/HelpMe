@@ -9,6 +9,7 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   const { data: session, status } = useSession();
+  console.log("🚀 ~ file: index.jsx ~ line 12 ~ Home ~ session", session);
   const router = useRouter();
 
   if (status === "loading") {
@@ -24,36 +25,36 @@ export default function Home() {
   };
 
   const routerElectrician = () => {
-    if(session){
+    if (session) {
       router.push("services-home/electrician");
-    }else{
+    } else {
       router.push("/login/client");
     }
   };
 
   const routerBuilder = () => {
-    if(session){
+    if (session) {
       router.push("services-home/builder");
-    }else{
+    } else {
       router.push("/login/client");
     }
-  }
+  };
 
   const routerSmartHome = () => {
-    if(session){
+    if (session) {
       router.push("services-home/automation");
-    }else{
+    } else {
       router.push("/login/client");
     }
-  }
+  };
 
   const routerAppliances = () => {
-    if(session){
+    if (session) {
       router.push("services-home/appliances");
-    }else{
+    } else {
       router.push("/login/client");
     }
-  }
+  };
   return (
     <div className={styles.container}>
       <Navbar />
@@ -82,7 +83,7 @@ export default function Home() {
         </section>
       </div>
       <div className={styles.content}>
-        <button className={styles.homeCleaning}onClick={routerAppliances} >
+        <button className={styles.homeCleaning} onClick={routerAppliances}>
           <div className={styles.homeCleaning__img}>
             <Image
               src="/img/electrodo.png"
@@ -179,7 +180,9 @@ export default function Home() {
         <div className={styles.about__login}>
           <p>
             Already have an account?{" "}
-            <Link href="/login/professional">Login</Link>
+            <button onClick={() => router.push("/login/professional")}>
+              Login
+            </button>
           </p>
         </div>
       </section>

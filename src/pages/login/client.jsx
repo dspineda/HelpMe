@@ -1,8 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 import styles from "../../styles/LoginClient.module.scss";
 
 export default function LoginProfessional() {
+  const BASE_URL = process.env.BASE_URL;
   const router = useRouter();
   const [form, setForm] = useState({});
 
@@ -67,6 +71,56 @@ export default function LoginProfessional() {
         </div>
         <div className={styles.form__input}>
           <button type="submit">Log in</button>
+        </div>
+        <div className={styles.other__Google}>
+          <button
+            type="button"
+            className={styles.signup__with__button}
+            onClick={() =>
+              router.push("/sign-up/client")
+            }
+          >
+            {" "}
+            <b>Sign Up</b>{" "}
+          </button>
+        </div>
+        <div className={styles.other__Google}>
+          <button
+            type="button"
+            className={styles.signup__with__button}
+            onClick={() =>
+              signIn("google", { callbackUrl: "http://localhost:3000" })
+            }
+          >
+            {" "}
+            <div className={styles.signup__with}>
+              <img
+                className={styles.signup__with__img}
+                src="..\img\google.png"
+                alt=""
+              />{" "}
+            </div>
+            <b>Continue with Google</b>{" "}
+          </button>
+        </div>
+        <div className={styles.other__Github}>
+          <button
+            type="button"
+            className={styles.signup__with__button}
+            onClick={() =>
+              signIn("github", { callbackUrl: "http://localhost:3000" })
+            }
+          >
+            {" "}
+            <div className={styles.signup__with}>
+              <img
+                className={styles.signup__with__img}
+                src="..\img\Octocat.png"
+                alt=""
+              />{" "}
+            </div>
+            <b>Continue with GitHub</b>{" "}
+          </button>
         </div>
       </form>
     </div>
