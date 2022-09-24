@@ -1,4 +1,4 @@
-import {Service} from "./professional.model";
+import Service from "./professional.model";
 
 
 export const createProfessional = async (serviceData) => {
@@ -95,14 +95,3 @@ export const findProfessionalById = async(id) => {
     throw new Error(error);
   }
 };
-/*
-export const findProfessionalsByServices = async (id) => {
-  try {
-    const professional = await Service.findOne({ "professional._id": id });
-    return professional;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-*/
