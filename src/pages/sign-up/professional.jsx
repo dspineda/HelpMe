@@ -1,18 +1,25 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { Spinner } from "reactstrap";
+import Swal from 'sweetalert2';
+import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/Sign-up-professional.module.scss";
 
 export default function SignUpProfessional() {
-  const [image, setImage] = useState("")
+  const [spinner, setSpinner] = useState(false);
+  const [image, setImage] = useState("");
   const [form, setForm] = useState({});
   const [service, setService] = useState({});
   const [formToSend, setFormToSend] = useState({});
+  const router = useRouter();
   useEffect(() => {
-    const newObje = Object.assign(form, {photo:image})
+    Object.assign(form, { photo: image });
     setFormToSend({ name: service, professional: form });
   }, [service, form, image]);
 
   const newProfessional = async () => {
+    setSpinner(true);
     const professional = await fetch("/api/auth/users/register-professional", {
       method: "POST",
       headers: {
@@ -20,11 +27,25 @@ export default function SignUpProfessional() {
       },
       body: JSON.stringify(formToSend),
     });
-    const data = await professional.json();
-    console.log(
-      "🚀 ~ file: professional.jsx ~ line 17 ~ newProfessional ~ data",
-      data
-    );
+    const {message} = await professional.json();
+    if (message === "User created successfully") {
+      setSpinner(false);
+      Swal.fire({
+        title: 'Your account has been created!',
+        text: 'Please check your email inbox to activate your account.',
+        icon: 'success',
+        confirmButtonText: 'Got it!',
+      });
+      router.push(`/login/professional`);
+    }else{
+      setSpinner(false);
+      Swal.fire({
+        title: message,
+        text: `Please try again`,
+        icon: 'error',
+        confirmButtonText: `Ok`,
+      });
+    }
   };
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -32,7 +53,7 @@ export default function SignUpProfessional() {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value});
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleService = (e) => {
@@ -53,11 +74,11 @@ export default function SignUpProfessional() {
     );
     const file = await res.json();
     setImage(file.secure_url);
-    console.log("🚀 ~ file: professional.jsx ~ line 60 ~ uploadImage ~ file.secure_url", file.secure_url)
+    console.log(
+      "🚀 ~ file: professional.jsx ~ line 60 ~ uploadImage ~ file.secure_url",
+      file.secure_url
+    );
   };
-  
-
-
 
   return (
     <div className={styles.container}>
@@ -119,11 +140,7 @@ export default function SignUpProfessional() {
             </div>
             <div className={styles.form__input}>
               <label htmlFor="photo">Photo </label>
-              <input
-                type="file"
-                name="file"
-                onChange={uploadImage}
-              />
+              <input type="file" name="file" onChange={uploadImage} />
             </div>
           </section>
           <section className={styles.section2}>
@@ -203,7 +220,7 @@ export default function SignUpProfessional() {
           </section>
         </div>
         <div className={styles.form__input}>
-          <button type="submit">Submit</button>
+          {spinner ? <Spinner color="primary" /> : <button type="submit">Submit</button>}
         </div>
         <div className={styles.form__input}>
           <p>

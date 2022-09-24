@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { Spinner } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Swal from "sweetalert2";
 import styles from "../../styles/LoginProfessional.module.scss";
 
 export default function LoginProfessional() {
   const router = useRouter();
   const [form, setForm] = useState({});
-
+  const [spinner, setSpinner] = useState(false);
   const loginProfessional = async () => {
+    setSpinner(true);
     const professional = await fetch("/api/auth/users/login-professional", {
       method: "POST",
       headers: {
@@ -15,15 +19,28 @@ export default function LoginProfessional() {
       body: JSON.stringify(form),
     });
     const data = await professional.json();
-    if (data.token) {
-      if (data.token) {
-         localStorage.setItem("token", data.token);
-         router.push(`/login/professional/${data.id}`);
-      } else {
-        alert(Fallo);
-      }
+    const { message } = data;
+    if (message === "User logged in") {
+      setSpinner(false);
+      localStorage.setItem("token", data.token)
+      Swal.fire({
+        title: "You are logged in!",
+        text: "Please wait while we redirect you to your profile.",
+        icon: "success",
+        confirmButtonText: "Got it!",
+      });
+      router.push(`/login/professional/${data.id}`);
+    } else {
+      setSpinner(false);
+      Swal.fire({
+        title: message,
+        text: `Please try again`,
+        icon: "error",
+        confirmButtonText: `Ok`,
+      });
     }
   };
+  
 
   const handleSignUp = (e) => {
     e.preventDefault();
