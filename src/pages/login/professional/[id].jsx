@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import NotFound from "../../../components/NotFound";
 import styles from "../../../styles/ProfessionalId.module.scss";
 
 export default function ProfessionalId() {
@@ -9,6 +10,12 @@ export default function ProfessionalId() {
   const [render, setRender] = useState(false);
   const router = useRouter();
   const { id } = router.query;
+  let token;
+  const ISERVER = typeof window === "undefined";
+
+  if (!ISERVER) {
+    token = localStorage.getItem("token");
+  }
 
   useEffect(() => {
     const getProfile = async () => {
@@ -19,7 +26,6 @@ export default function ProfessionalId() {
         },
       });
       const data = await response.json();
-
       setProfile(data);
     };
     const getNotification = async () => {
@@ -93,7 +99,14 @@ export default function ProfessionalId() {
     setRender(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
+  };
+
   return (
+    <>
+    {token ? (
     <div className={styles.container}>
       <section className={styles.section1}>
         <div className={styles.section1__container}>
@@ -107,6 +120,7 @@ export default function ProfessionalId() {
           </div>
         </div>
       </section>
+      <button onClick={handleLogout}>Sign Out</button>
       <section className={styles.section2}>
         <div className={styles.section2__name}>
           <h1>
@@ -214,6 +228,7 @@ export default function ProfessionalId() {
           </div>
         </div>
       </section>
-    </div>
+    </div>) : <NotFound />}
+    </>
   );
 }

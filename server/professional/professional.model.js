@@ -74,7 +74,7 @@ const ProfessionalSchema = new Schema(
     },
     isActivated: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     comments: {
       type: String,

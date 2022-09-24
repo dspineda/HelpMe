@@ -23,10 +23,11 @@ export default async function verifyAccount(req, res) {
         ) {
           professional.professional[i].passwordResetActivationToken = null;
           professional.professional[i].isActivated = true;
+          const idProfessional = professional.professional[i]._id;
           await professional.save();
           const jwt = await signToken({ email: professional.email });
           console.log("Account activated successfully");
-          return res.status(200).json({ token: jwt });
+          return res.status(200).json({ token: jwt, id: idProfessional });
         }
       }
     

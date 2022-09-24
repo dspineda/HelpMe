@@ -7,10 +7,9 @@ import {sendMailSendGrid} from "../../../../utils/mail";
 
 export default async function handler(req, res) {
   await dbConnect();
+  const BASE_URL = process.env.BASE_URL;
   const userData = req.body;
-  console.log("🚀 ~ file: register-professional.js ~ line 11 ~ handler ~ userData", userData)
   const userFound = await findProfessionalByEmail(userData.professional.email);
-  console.log("🚀 ~ file: register-professional.js ~ line 11 ~ handler ~ userFound", userFound)
  
   if (userFound) {
     return res.status(400).json({ message: "User already exists" });
@@ -38,12 +37,12 @@ export default async function handler(req, res) {
       preheader: 'Activate your Account Now.',
       template_id: 'd-8e132668b8f7429ea99a743ed92f30e6',
       dynamic_template_data: {
-        //name: user.name.capitalize(),
-        //lastName: user.lastName.capitalize(),
-        url: `http://localhost:3000/activate-account/${hash}`,
+        name: userData.professional.firstName,
+        lastName: userData.professional.lastName,
+        url: `${BASE_URL}/activate-account/${hash}`,
       },
     };
-    //await sendMailSendGrid(emailData);
+    await sendMailSendGrid(emailData);
     console.log('User created successfully', professional);
     return res.status(200).json({ message: 'User created successfully' });
   } catch (error) {

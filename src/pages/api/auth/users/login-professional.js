@@ -26,7 +26,7 @@ export default async function loginProfessional(req, res) {
       return res.status(400).json({ message: "Incorrect password" });
     }
     const token = await signToken({ email: professional.email });
-    return res.status(220).json({ token, id });
+    return res.status(220).json({ token, id, message: "User logged in" });
   } catch (e) {
     return res.status(500).json({ message: "Internal server error" });
   }

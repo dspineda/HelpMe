@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 180vh;
+  height: 200vh;
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -98,6 +98,7 @@
       font-family: 'Oswald', sans-serif;
       margin-left: 20px;
       margin-bottom: 0;
+      padding-top: 20px;
       font-weight: bold;
       margin-left: 0;
       text-decoration-line: underline overline ;
@@ -132,9 +133,13 @@
           font-family: 'Oswald', sans-serif;
           margin-left: 20px;
           padding-bottom: 30px;
+          padding-top: 20px;
           font-weight: bold;
           margin-left: 0;
           text-decoration-line: underline overline ;
+        }
+        a{
+          color: #111111;
         } 
     }  
   }
