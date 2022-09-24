@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
 
 .main{
+  
   .sectionInfo{
     text-align: left;
     .title{
@@ -40,6 +41,16 @@
   background: #F1C50E;
   text-align: center;
   padding-bottom: 50px;
+  button{
+    border: 0;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover{
+      background: #E5E5E5;
+      transition: 1s;
+      transform: scale(1.1);
+    }
+  } 
   .homeCleaning{
     background: #FFFFFF;
     text-align: center;
@@ -184,15 +195,30 @@
   }
   .about__button{
     background: #EAC60B;
-    padding-top: 20px;
     width: 250px;
     height: 60px;
     margin: auto;
-    color: #111111;
     font-size: 25px;
     cursor: pointer;
     letter-spacing: 1px;
-    margin: 30px auto 60px; 
+    margin: 30px 60px; 
+    border: none;
+    margin-left: 70px; 
+  }
+  .about__login{
+    p{
+      margin: 0;
+      padding: 0;
+    }
+    color: #111111;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 20px;
+    margin-bottom: 60;
+    font-weight: bold;
+    margin-left: 0;
+    text-decoration-line: underline overline ;
+    padding-bottom: 30px;
   }
   
 }
@@ -362,7 +388,18 @@
       font-style: italic;
       
     }
-  } 
+  }
+  button{
+    border: 0;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover{
+      background: #E5E5E5;
+      transition: 1s;
+      transform: scale(1.1);
+    }
+  }
+   
 }
 
 .about{
@@ -391,15 +428,18 @@
   }
   .about__button{
     background: #EAC60B;
-    padding-top: 20px;
     width: 250px;
     height: 60px;
     margin: auto;
-    color: #111111;
     font-size: 25px;
     cursor: pointer;
     letter-spacing: 1px;
-    margin: 30px auto 60px; 
+    margin: 30px auto 20px; 
+  }
+  .about__button:hover{
+    background: rgb(240, 207, 45);
+    transition: 1s;
+    transform: scale(1.1);
   }
 }
 }

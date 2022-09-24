@@ -1,19 +1,108 @@
-import Professional from './professional.model'
+import {Service} from "./professional.model";
 
-export const createProfessional = async (professionalData) => {
+
+export const createProfessional = async (serviceData) => {
   try {
-    const professional = await Professional.create(professionalData)
-    return professional
+    const findNameService = await Service.findOne({ name: serviceData.name });
+    if (!findNameService) {
+      const professional = await Service.create(serviceData);
+      return professional;
+    }
+    if (findNameService) {
+      return Service.findOneAndUpdate(
+        { name: serviceData.name },
+        { $push: { professional: serviceData.professional } },
+        { new: true }
+      );
+    }
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
-}
+};
 
 export const findProfessionalByEmail = async (email) => {
   try {
-    const professional = await Professional.findOne({ email })
-    return professional
+    const professional = await Service.findOne({ "professional.email": email });
+    return professional;
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
+  }
+};
+
+export const findOneUserByResetToken = async (token) => {
+  try {
+    const professional = await Service.findOne({
+      "professional.passwordResetActivationToken": token,
+    });
+    return professional;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const findProfessionalElectrician = async () => {
+  const resultAll = []
+  try {
+    const service = await Service.findOne({
+      name: "Electrician"});
+
+    for (let index = 0; index < service.professional.length; index++) {
+      const data = {
+         id: service.professional[index].id,
+         firstName : service.professional[index].firstName,
+         lastName : service.professional[index].lastName,
+         phone: service.professional[index].phone,
+         address: service.professional[index].address,
+         city: service.professional[index].city,
+         description: service.professional[index].description,
+         isActivated: service.professional[index].isActivated,
+         photo: service.professional[index].photo,
+    }
+      resultAll.push(data)
+    } 
+    return resultAll;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const findProfessionalById = async(id) => {
+  const resultProfessional = []
+  try {
+    const result = await Service.findOne({
+      "professional._id": id,
+    });
+
+    for (let index = 0; index <= result.professional.length; index++) {
+      if (result.professional[index].id === id) {
+        const data = {
+          id: result.professional[index].id,
+          firstName: result.professional[index].firstName,
+          lastName: result.professional[index].lastName,
+          phone: result.professional[index].phone,
+          address: result.professional[index].address,
+          city:result.professional[index].city,
+          description: result.professional[index].description,
+          email: result.professional[index].email,
+          photo: result.professional[index].photo,
+          notifications: result.professional[index].notifications,
+        }
+        resultProfessional.push(data)
+        return resultProfessional;
+      }
+      }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+/*
+export const findProfessionalsByServices = async (id) => {
+  try {
+    const professional = await Service.findOne({ "professional._id": id });
+    return professional;
+  } catch (error) {
+    throw new Error(error);
   }
 }
+
+*/

@@ -1,22 +1,15 @@
+import Link from "next/link";
 import styles from "../styles/Navbar.module.scss";
+
 
 function Navbar() {
   return (
-		<header>
-		<button to='/'>
-			<a href='#' className='logo'>
-				<span>Help</span>Me
-			</a>
-		</button>
-		<nav className='navbar'>
-			<a href='#'>
-				<button to='/'>Home</button>
-			</a>
-			<a href='#'>
-				<button to='/about'>About</button>
-			</a>
-		</nav>
-	</header>
+    <header>
+      <div className={styles.container}>
+      <button><Link href="/">HOME </Link></button>
+      <button><Link href="/sign-up/client">SIGN UP </Link></button>
+      </div>
+    </header>
   );
 }
 

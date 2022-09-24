@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
+
 
 const ProfessionalSchema = new Schema(
   {
@@ -38,10 +39,10 @@ const ProfessionalSchema = new Schema(
       type: String,
       //required: true,
     },
-    services: [
+    notifications: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Service",
+        ref: "Notification",
       },
     ],
     certificates: [
@@ -63,14 +64,23 @@ const ProfessionalSchema = new Schema(
       type: Number,
       //required: true,
     },
-    image: {
+    photo: {
       type: String,
-      //required: true,
+      default: "https://res.cloudinary.com/davpin/image/upload/v1663655726/HelpMe%20images/habitos-laborales-tecnico-electricista_vjmtzj.jpg",
     },
     createdAt: {
       type: Date,
       default: Date.now,
     },
+    isActivated: {
+      type: Boolean,
+      default: true,
+    },
+    comments: {
+      type: String,
+    },
+    passwordResetActivationToken: String,
+    passwordResetActivationExpires: Date,
   },
   {
     timestamps: true,
@@ -78,36 +88,43 @@ const ProfessionalSchema = new Schema(
   }
 );
 
-ProfessionalSchema.methods.comparePassword = async function comparepassword(
-	enteredPassword,
-	next
-) {
-	const professional = this;
+const ServiceSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    professional: [ProfessionalSchema],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-	try {
-		const isMatch = await bcrypt.compare(enteredPassword, professional.password);
-		return isMatch;
-	} catch (e) {
-		next(e);
-		return false;
-	}
+ProfessionalSchema.methods.comparePassword = async function comparepassword(
+  enteredPassword,
+  next
+) {
+  const professional = this;
+
+  try {
+    const isMatch = await bcrypt.compare(
+      enteredPassword,
+      professional.password
+    );
+    return isMatch;
+  } catch (e) {
+    next(e);
+    return false;
+  }
 };
 
+const Service = models.Service || model("Service", ServiceSchema);
+const Professional = models.Professional || model("Professional", ProfessionalSchema);
 
-/*
-ProfessionalSchema.pre("save", async function (next) {
-  const professional = this;
-  try {
-    if(!professional.isModified("password")) {
-      return next();
-    }
-    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
-    const hash = await bcrypt.hash(professional.password, salt);
-    professional.password = hash;
-  } catch (error) {
-    next(error);
-  }
-});
-*/
+export { Service, Professional };
 
-export default models.Professional || model("Professional", ProfessionalSchema);
+//export default models.Service || model("Service", ServiceSchema);
