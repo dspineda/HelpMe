@@ -49,11 +49,10 @@ const ProfessionalSchema = new Schema(
       {
         name: {
           type: String,
-          //required: true,
         },
         url: {
           type: String,
-          //required: true,
+
         },
       },
     ],
@@ -62,7 +61,6 @@ const ProfessionalSchema = new Schema(
     },
     rating: {
       type: Number,
-      //required: true,
     },
     photo: {
       type: String,
@@ -122,9 +120,8 @@ ProfessionalSchema.methods.comparePassword = async function comparepassword(
   }
 };
 
-const Service = models.Service || model("Service", ServiceSchema);
-const Professional = models.Professional || model("Professional", ProfessionalSchema);
+export default models.Service || model("Service", ServiceSchema);
+//const Service = models.Service || model("Service", ServiceSchema);
+//const Professional = models.Professional || model("Professional", ProfessionalSchema);
 
-export { Service, Professional };
-
-//export default models.Service || model("Service", ServiceSchema);
+//export { Service, Professional };
