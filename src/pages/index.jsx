@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import styles from "../styles/Home.module.scss";
@@ -55,6 +56,19 @@ export default function Home() {
       router.push("/login/client");
     }
   };
+
+  const handleLoginPro = () => {
+    if(session){
+      Swal.fire({
+        title: "Invalid!",
+        text: "Please, sign out your account client.",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
+    }else{
+      router.push("/login/professional")
+    }
+  }
   return (
     <div className={styles.container}>
       <Navbar />
@@ -180,7 +194,7 @@ export default function Home() {
         <div className={styles.about__login}>
           <p>
             Already have an account?{" "}
-            <button onClick={() => router.push("/login/professional")}>
+            <button onClick={handleLoginPro}>
               Login
             </button>
           </p>

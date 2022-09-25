@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NavbarInListProfessionals from "../../components/NavbarInListProfessionals";
+import Navbar from "../../components/Navbar";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -81,7 +81,7 @@ export default function ServiceElectrician() {
             </ul>
           </div>
         </section>
-        <NavbarInListProfessionals />
+        <Navbar />
       </div>
       ) : 
       <NotFound />

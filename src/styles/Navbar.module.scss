@@ -1,5 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
+
 .container
 {   h5{
     color: black;
@@ -7,6 +8,8 @@
     padding: 0;
     margin-left: 10px;
     margin-top: 10px;
+    font-family: Raleway;
+    color:  #F1C50E;
 }
     display: flex;
     justify-content: center;
@@ -19,7 +22,7 @@
       padding-top: 0.5em;
 	  text-align: center;
     button{
-      color:  #F1C50E;;
+      color:  #F1C50E;
       text-decoration: none;
       font: 20px Raleway;
       margin: 0px 10px;

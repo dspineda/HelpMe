@@ -66,6 +66,84 @@ export const findProfessionalElectrician = async () => {
   }
 };
 
+export const findProfessionalAutomation = async () => {
+  const resultAll = []
+  try {
+    const service = await Service.findOne({
+      name: "Home automation expert"});
+
+    for (let index = 0; index < service.professional.length; index++) {
+      const data = {
+         id: service.professional[index].id,
+         firstName : service.professional[index].firstName,
+         lastName : service.professional[index].lastName,
+         phone: service.professional[index].phone,
+         address: service.professional[index].address,
+         city: service.professional[index].city,
+         description: service.professional[index].description,
+         isActivated: service.professional[index].isActivated,
+         photo: service.professional[index].photo,
+    }
+      resultAll.push(data)
+    } 
+    return resultAll;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const findProfessionalAppliances = async () => {
+  const resultAll = []
+  try {
+    const service = await Service.findOne({
+      name: "Home appliances expert"});
+
+    for (let index = 0; index < service.professional.length; index++) {
+      const data = {
+         id: service.professional[index].id,
+         firstName : service.professional[index].firstName,
+         lastName : service.professional[index].lastName,
+         phone: service.professional[index].phone,
+         address: service.professional[index].address,
+         city: service.professional[index].city,
+         description: service.professional[index].description,
+         isActivated: service.professional[index].isActivated,
+         photo: service.professional[index].photo,
+    }
+      resultAll.push(data)
+    } 
+    return resultAll;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const findProfessionalBuilder = async () => {
+  const resultAll = []
+  try {
+    const service = await Service.findOne({
+      name: "Builder, plumber, painter"});
+
+    for (let index = 0; index < service.professional.length; index++) {
+      const data = {
+         id: service.professional[index].id,
+         firstName : service.professional[index].firstName,
+         lastName : service.professional[index].lastName,
+         phone: service.professional[index].phone,
+         address: service.professional[index].address,
+         city: service.professional[index].city,
+         description: service.professional[index].description,
+         isActivated: service.professional[index].isActivated,
+         photo: service.professional[index].photo,
+    }
+      resultAll.push(data)
+    } 
+    return resultAll;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const findProfessionalById = async(id) => {
   const resultProfessional = []
   try {

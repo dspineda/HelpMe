@@ -14,7 +14,7 @@ function Navbar() {
         <header>
           <div className={styles.container}>
             <button onClick={() => router.push("/")}>HOME </button>
-            <button onClick={() => signOut({ callbackUrl: BASE_URL })}>
+            <button onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}>
               SIGN OUT
             </button>
             <div className={styles.logo}>
