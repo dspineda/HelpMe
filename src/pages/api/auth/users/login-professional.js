@@ -7,7 +7,7 @@ export default async function loginProfessional(req, res) {
   const { email, password } = req.body;
   const professional = await findProfessionalByEmail(email);
   if (!professional) {
-    return res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User does not exist or password incorrect" });
   }
   const filterEmail = professional.professional.filter(
     (item) => item.email === email
@@ -15,7 +15,7 @@ export default async function loginProfessional(req, res) {
   const id= filterEmail[0]._id
   try {
     if (!filterEmail) {
-      return res.status(400).json({ message: "User does not exist" });
+      return res.status(400).json({ message: "User does not exist or password incorrect" });
     }
     if (!filterEmail[0].isActivated) {
       return res.status(400).json({ message: "User is not activated" });
@@ -23,7 +23,7 @@ export default async function loginProfessional(req, res) {
     const isMatch = await filterEmail[0].comparePassword(password);
 
     if (!isMatch) {
-      return res.status(400).json({ message: "Incorrect password" });
+      return res.status(400).json({ message: "User does not exist or password incorrect" });
     }
     const token = await signToken({ email: professional.email });
     return res.status(220).json({ token, id, message: "User logged in" });

@@ -42,7 +42,7 @@ export default function ProfessionalId() {
     getNotification();
   }, [id, render]);
 
-  const handleAccept = async (id, email) => {
+  const handleAccept = async (id, email, date, time, client,description) => {
     setRender(true);
     const response = await fetch(`/api/notifications/${id}`, {
       method: "PATCH",
@@ -52,16 +52,17 @@ export default function ProfessionalId() {
       body: JSON.stringify({
         status: "accepted",
         email: email,
+        date,
+        time,
+        client,
+        description,
       }),
     });
-    console.log(
-      "🚀 ~ file: [id].jsx ~ line 47 ~ handleAccept ~ response",
-      response
-    );
+    console.log("🚀 ~ file: [id].jsx ~ line 61 ~ handleAccept ~ response", response)
     setRender(false);
   };
 
-  const handleReject = async (id, email) => {
+  const handleReject = async (id, email, date, time, client, description) => {
     setRender(true);
     const response = await fetch(`/api/notifications/${id}`, {
       method: "PATCH",
@@ -71,12 +72,13 @@ export default function ProfessionalId() {
       body: JSON.stringify({
         status: "reject",
         email: email,
+        date,
+        time,
+        client,
+        description,
       }),
     });
-    console.log(
-      "🚀 ~ file: [id].jsx ~ line 47 ~ handleAccept ~ response",
-      response
-    );
+    console.log("🚀 ~ file: [id].jsx ~ line 81 ~ handleReject ~ response", response)
     setRender(false);
   };
 
@@ -92,10 +94,6 @@ export default function ProfessionalId() {
         status: "completed",
       }),
     });
-    console.log(
-      "🚀 ~ file: [id].jsx ~ line 47 ~ handleAccept ~ response",
-      response
-    );
     setRender(false);
   };
 
@@ -106,129 +104,151 @@ export default function ProfessionalId() {
 
   return (
     <>
-    {token ? (
-    <div className={styles.container}>
-      <section className={styles.section1}>
-        <div className={styles.section1__container}>
-          <div className={styles.section1__yellow}></div>
-          <div className={styles.section1__photo}>
-            <img
-              src={profile[0]?.photo}
-              alt="Profile Photo"
-              style={{ width: "100%", height: "100%" }}
-            ></img>
-          </div>
-        </div>
-      </section>
-      <button onClick={handleLogout}>Sign Out</button>
-      <section className={styles.section2}>
-        <div className={styles.section2__name}>
-          <h1>
-            {profile[0]?.firstName} {profile[0]?.lastName}
-          </h1>
-        </div>
-        <div className={styles.container__title}>
-          <h5>Profile</h5>
-        </div>
-        <div className={styles.section2__profile}>
-          <p>
-            <strong>email:</strong> {profile[0]?.email}
-          </p>
-          <p>
-            <strong>phone:</strong> {profile[0]?.phone}
-          </p>
-          <p>
-            <strong>city: </strong> {profile[0]?.city}
-          </p>
-          <p>
-            <strong>address: </strong> {profile[0]?.address}
-          </p>
-          <p>
-            <strong>certificates:</strong>
-          </p>
-          <p>
-            <strong>score:</strong>
-          </p>
-          <p>
-            <strong>comments:</strong>
-          </p>
-        </div>
-        <div className={styles.section2__notifications}>
-          <h5>Notifications</h5>
-          <section className={styles.color__green}>
-            <div className={styles.color__green__square}></div>
-            <div>
-              <p>In progress</p>
+      {token ? (
+        <div className={styles.container}>
+          <section className={styles.section1}>
+            <div className={styles.section1__container}>
+              <div className={styles.section1__yellow}></div>
+              <div className={styles.section1__photo}>
+                <img
+                  src={profile[0]?.photo}
+                  alt="Profile Photo"
+                  style={{ width: "100%", height: "100%" }}
+                ></img>
+              </div>
             </div>
           </section>
-          <section className={styles.color__yellow}>
-            <div className={styles.color__yellow__square}></div>
-            <div>
-              <p>New notification</p>
+          <button onClick={handleLogout}>Sign Out</button>
+          <section className={styles.section2}>
+            <div className={styles.section2__name}>
+              <h1>
+                {profile[0]?.firstName} {profile[0]?.lastName}
+              </h1>
             </div>
-          </section>
-          <div className={styles.section2__list}>
-            {services.length > 0 ? (
-              <ul>
-                {services.map((item) =>
-                  item.status === "pending" || item.status === "accepted" ? (
-                    <li
-                      key={item._id}
-                      className={
-                        item?.status === "pending"
-                          ? styles.pending
-                          : styles.accept
-                      }
-                    >
-                      <strong>Service:</strong> {item.description}
-                      <br />
-                      <strong>Client:</strong> {item.client}
-                      <br />
-                      <strong>Email:</strong> {item.email}
-                      <br />
-                      <strong>City:</strong> {item.city}
-                      <br />
-                      <strong>Address:</strong> {item.address}
-                      <br />
-                      <strong>Date:</strong> {item.date}
-                      <br />
-                      <strong>Hour:</strong> {item.time}
-                      <br />
-                      <div className={styles.section2__buttons}>
-                        {item.status === "pending" &&
-                        item.status !== "reject" ? (
-                          <div>
-                            <button
-                              onClick={() => handleAccept(item._id, item.email)}
-                            >
-                              Accept
-                            </button>
-                            <button
-                              className={styles.reject}
-                              onClick={() => handleReject(item._id, item.email)}
-                            >
-                              Reject
-                            </button>
+            <div className={styles.container__title}>
+              <h5>Profile</h5>
+            </div>
+            <div className={styles.section2__profile}>
+              <p>
+                <strong>email:</strong> {profile[0]?.email}
+              </p>
+              <p>
+                <strong>phone:</strong> {profile[0]?.phone}
+              </p>
+              <p>
+                <strong>city: </strong> {profile[0]?.city}
+              </p>
+              <p>
+                <strong>address: </strong> {profile[0]?.address}
+              </p>
+              <p>
+                <strong>certificates:</strong>
+              </p>
+              <p>
+                <strong>score:</strong>
+              </p>
+              <p>
+                <strong>comments:</strong>
+              </p>
+            </div>
+            <div className={styles.section2__notifications}>
+              <h5>Notifications</h5>
+              <section className={styles.color__green}>
+                <div className={styles.color__green__square}></div>
+                <div>
+                  <p>In progress</p>
+                </div>
+              </section>
+              <section className={styles.color__yellow}>
+                <div className={styles.color__yellow__square}></div>
+                <div>
+                  <p>New notification</p>
+                </div>
+              </section>
+              <div className={styles.section2__list}>
+                {services.length > 0 ? (
+                  <ul>
+                    {services.map((item) =>
+                      item.status === "pending" ||
+                      item.status === "accepted" ? (
+                        <li
+                          key={item._id}
+                          className={
+                            item?.status === "pending"
+                              ? styles.pending
+                              : styles.accept
+                          }
+                        >
+                          <strong>Service:</strong> {item.description}
+                          <br />
+                          <strong>Client:</strong> {item.client}
+                          <br />
+                          <strong>Email:</strong> {item.email}
+                          <br />
+                          <strong>City:</strong> {item.city}
+                          <br />
+                          <strong>Address:</strong> {item.address}
+                          <br />
+                          <strong>Date:</strong> {item.date}
+                          <br />
+                          <strong>Hour:</strong> {item.time}
+                          <br />
+                          <div className={styles.section2__buttons}>
+                            {item.status === "pending" &&
+                            item.status !== "reject" ? (
+                              <div>
+                                <button
+                                  onClick={() =>
+                                    handleAccept(
+                                      item._id,
+                                      item.email,
+                                      item.date,
+                                      item.time,
+                                      item.client,
+                                      item.description
+                                    )
+                                  }
+                                >
+                                  Accept
+                                </button>
+                                <button
+                                  className={styles.reject}
+                                  onClick={() =>
+                                    handleReject(
+                                      item._id,
+                                      item.email,
+                                      item.date,
+                                      item.time,
+                                      item.client,
+                                      item.description
+                                    )
+                                  }
+                                >
+                                  Reject
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                onClick={() =>
+                                  handleCompleted(item._id, item.email)
+                                }
+                              >
+                                Completed
+                              </button>
+                            )}
                           </div>
-                        ) : (
-                          <button
-                            onClick={() =>
-                              handleCompleted(item._id, item.email)
-                            }
-                          >
-                            Completed
-                          </button>
-                        )}
-                      </div>
-                    </li>
-                  ) : null
-                )}
-              </ul>
-            ) : null}
-          </div>
+                        </li>
+                      ) : null
+                    )}
+                  </ul>
+                ) : null}
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>) : <NotFound />}
+      ) : (
+        <NotFound />
+      )}
     </>
   );
 }

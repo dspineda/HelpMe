@@ -23,7 +23,6 @@ export default function ServiceAutomation() {
           "Content-Type": "application/json",
         },
       });
-      console.log("🚀 ~ file: automation.jsx ~ line 26 ~ getAllAutomation ~ response", response)
       setData(await response.json());
     };
     getAllAutomation();

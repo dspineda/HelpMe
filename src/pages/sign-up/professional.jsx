@@ -29,7 +29,6 @@ export default function SignUpProfessional() {
     });
     const {message} = await professional.json();
     if (message === "User created successfully") {
-      setSpinner(false);
       Swal.fire({
         title: 'Your account has been created!',
         text: 'Please check your email inbox to activate your account.',
@@ -216,7 +215,7 @@ export default function SignUpProfessional() {
           </section>
         </div>
         <div className={styles.form__input}>
-          {spinner ? <Spinner color="primary" /> : <button type="submit">Submit</button>}
+        <button type="submit"> {spinner ? <Spinner animation="border" variant="light" /> :'Submit'}</button>
         </div>
         <div className={styles.form__input}>
           <p>

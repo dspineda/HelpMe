@@ -26,7 +26,6 @@ export default function ProfileProfessional() {
         },
       });
       const data = await response.json();
-      console.log("🚀 ~ file: [id].jsx ~ line 26 ~ getProfile ~ data", data)
 
       setProfile(data);
     };
@@ -50,7 +49,6 @@ export default function ProfileProfessional() {
   }, [id]);
 
   const handleContact = (id) => {
-    console.log("🚀 ~ file: [id].jsx ~ line 29 ~ handleContact ~ id", id);
     router.push(`/contact/${id}`);
   };
 
@@ -114,12 +112,12 @@ export default function ProfileProfessional() {
 
           <div className={styles.section2__description}>
             <p>{profile[0]?.description}</p>
-            <p>
+            {/*<p>
               <strong>Email:</strong> {profile[0]?.email}
             </p>
             <p>
               <strong>Phone:</strong> {profile[0]?.phone}
-            </p>
+            </p>*/}
             <p>
               <strong>City: </strong> {profile[0]?.city}
             </p>

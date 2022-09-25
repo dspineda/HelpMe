@@ -10,7 +10,6 @@ import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   const { data: session, status } = useSession();
-  console.log("🚀 ~ file: index.jsx ~ line 12 ~ Home ~ session", session);
   const router = useRouter();
 
   if (status === "loading") {

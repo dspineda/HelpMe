@@ -59,9 +59,18 @@ const ProfessionalSchema = new Schema(
     reviews: {
       type: Array,
     },
-    rating: {
-      type: Number,
-    },
+    calification: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Calification",
+      },
+    ],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
     photo: {
       type: String,
       default: "https://res.cloudinary.com/davpin/image/upload/v1663655726/HelpMe%20images/habitos-laborales-tecnico-electricista_vjmtzj.jpg",

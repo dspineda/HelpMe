@@ -1,6 +1,9 @@
 import DatePicker from "react-datepicker";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { Spinner } from "reactstrap";
+import Swal from 'sweetalert2';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../../styles/Contact.module.scss";
 
@@ -8,6 +11,7 @@ export default function Contact() {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [form, setForm] = useState({});
+  const [spinner, setSpinner] = useState(false);
   const [formToSend, setFormToSend] = useState({});
   const router = useRouter();
   const { id } = router.query;
@@ -22,6 +26,7 @@ export default function Contact() {
   }, [date, time, form]);
 
   const newNotification = async () => {
+    setSpinner(true);
     const notification = await fetch(`/api/notifications/${id}`, {
       method: "POST",
       headers: {
@@ -30,12 +35,24 @@ export default function Contact() {
       body: JSON.stringify(formToSend),
     });
     const response = await notification.json();
-    console.log(
-      "🚀 ~ file: [id].jsx ~ line 31 ~ newNotification ~ response",
-      response
-    );
+    if (response.message === "Notification sent") {
+      setSpinner(false);
+      Swal.fire({
+        title: 'Your notification has been created!',
+        text: 'You will receive a notification in your email when it is accepted. ',
+        icon: 'success',
+        confirmButtonText: 'Got it!',
+      });
     router.push("/");
-
+    }else{
+      setSpinner(false);
+      Swal.fire({
+        title: response.message,
+        text: `Please try again`,
+        icon: 'error',
+        confirmButtonText: `Ok`,
+      });
+    }
   };
 
   const handleSend = (e) => {
@@ -121,7 +138,7 @@ export default function Contact() {
             dateFormat="Pp"
           />
           <div className={styles.form__button}>
-            <button type="submit" >Submit</button>
+          {spinner ? <Spinner color="primary" /> : <button type="submit">Submit</button>}
           </div>
         </div>
       </form>
