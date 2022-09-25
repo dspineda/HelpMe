@@ -1,9 +1,26 @@
 import {findProfessionalById} from "../../../../server/professional/professional.service";
+import { verifyToken } from "../../../../server/auth/auth.service";
 import dbConnect from "../../../../server/config/database";
 
 export default async function handle(req, res) {
   await dbConnect();
   const { id } = req.query;
+  const auth = req.headers?.authorization;
+  if (!auth) {
+    return res.status(401).json({ error: "No Unauthorized" });
+  }
+  const token = auth.split(' ')[1];
+  const decoded = await verifyToken(token)
+  if (!decoded) {
+    return res.status(401).json({ error: "No Unauthorized" });
+  }
+  const { email } = decoded;
+  const user = await findProfessionalById(id);
+  if(email !== user.email){
+    return res.status(401).json({ error: "No Unauthorized" });
+  }
+
+
   try {
     let electrician = await findProfessionalById(id);
     if (!electrician) {

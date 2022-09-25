@@ -10,37 +10,41 @@ export default function ProfessionalId() {
   const [render, setRender] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-  let token;
-  const ISERVER = typeof window === "undefined";
-
-  if (!ISERVER) {
-    token = localStorage.getItem("token");
-  }
 
   useEffect(() => {
-    const getProfile = async () => {
-      const response = await fetch(`/api/maintance/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setProfile(data);
-    };
-    const getNotification = async () => {
-      const response = await fetch(`/api/notifications/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setServices(data);
-    };
-    getProfile();
-    getNotification();
-  }, [id, render]);
+    if(id){
+      const token = localStorage.getItem("token");
+      if(token){
+        const getProfile = async () => {
+          const response = await fetch(`/api/maintance/${id}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          setProfile(data);
+        };
+        const getNotification = async () => {
+          const response = await fetch(`/api/notifications/${id}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          setServices(data);
+        };
+        getProfile();
+        getNotification();
+      }else{
+        router.push('/login/professional')
+      }
+    }
+  }, [id, render, router]);
+
 
   const handleAccept = async (id, email, date, time, client,description) => {
     setRender(true);
@@ -104,7 +108,6 @@ export default function ProfessionalId() {
 
   return (
     <>
-      {token ? (
         <div className={styles.container}>
           <section className={styles.section1}>
             <div className={styles.section1__container}>
@@ -246,9 +249,6 @@ export default function ProfessionalId() {
             </div>
           </section>
         </div>
-      ) : (
-        <NotFound />
-      )}
     </>
   );
 }
