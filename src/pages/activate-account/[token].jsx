@@ -28,12 +28,14 @@ export default function ActivateAccount() {
       });
       router.push(`/login/professional/${data.id}`);
     } else {
+      setSpinner(false);
       Swal.fire({
         title: "Invalid token!",
         text: "Please, try again later.",
         icon: "error",
         confirmButtonText: "Got it!",
       });
+      router.push("/");
     }
   };
 

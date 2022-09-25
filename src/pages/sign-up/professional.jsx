@@ -74,10 +74,6 @@ export default function SignUpProfessional() {
     );
     const file = await res.json();
     setImage(file.secure_url);
-    console.log(
-      "🚀 ~ file: professional.jsx ~ line 60 ~ uploadImage ~ file.secure_url",
-      file.secure_url
-    );
   };
 
   return (

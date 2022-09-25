@@ -93,6 +93,44 @@
       text-decoration-line: underline overline ;
     }
   }
+  .other__Google{
+    padding-bottom: 5px;
+  }
+  .other__Github{
+    padding-bottom: 20px;
+  }
+  .signup__with {
+    margin-top: 3;
+  }
+  
+  .signup__with__button{
+    width: 80%;
+    font: inherit;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    border: antiquewhite;
+    background-color: #ffffff;
+    padding: 5px;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+    color: #5e6c84;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  .signup__with__button:hover {
+    transition-duration: 0.4s;
+    background-color: #f6f6f6;
+  }
+  
+  .signup__with__img {
+    height: 18px;
+    width: 18px;
+    margin-top: 3px;
+    margin-right: 5px;
+  }
   
 }
 

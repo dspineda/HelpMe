@@ -209,6 +209,16 @@
     p{
       margin: 0;
       padding: 0;
+      button{
+        border: none;
+        background: transparent;
+        color: #111111;
+        cursor: pointer;
+        font-size: 30px;
+        font-family: 'Oswald', sans-serif;
+        text-decoration-line: underline overline ;
+        font-weight: bold;
+      }
     }
     color: #111111;
     font-size: 30px;
@@ -441,5 +451,6 @@
     transition: 1s;
     transform: scale(1.1);
   }
+ 
 }
 }
