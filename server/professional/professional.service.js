@@ -164,6 +164,7 @@ export const findProfessionalById = async(id) => {
           email: result.professional[index].email,
           photo: result.professional[index].photo,
           notifications: result.professional[index].notifications,
+          //certificates: result.professional[index].certificates,
         }
         resultProfessional.push(data)
         return resultProfessional;

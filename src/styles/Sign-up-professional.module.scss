@@ -6,7 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 200vh;
+  height: 220vh;
   display: block;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -64,6 +64,19 @@
       display: block;
       width: 90%;
       height: 2rem;
+      margin: 0.5rem 0;
+      padding: 0 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      background: #ccc;
+      color: black;
+      margin-left: 20px;
+    }
+    textarea{
+      display: block;
+      width: 90%;
+      height: 190px;
       margin: 0.5rem 0;
       padding: 0 0.5rem;
       border: 1px solid #ccc;
@@ -140,7 +153,21 @@
         }
         a{
           color: #111111;
-        } 
+        }
+        textarea{
+          display: block;
+          width: 90%;
+          height: 190px;
+          margin: 0.5rem 0;
+          padding: 0 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          outline: none;
+          background: #ccc;
+          color: black;
+          margin-left: 20px;
+        }
+      
     }  
   }
 }
