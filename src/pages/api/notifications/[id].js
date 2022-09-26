@@ -11,6 +11,7 @@ import {
 export default async function handler(req, res) {
   await dbConnect();
   const { id } = req.query;
+  console.log("🚀 ~ file: [id].js ~ line 14 ~ handler ~ id ", id )
   const { email, name, message, date, time, city, address } = req.body;
   switch (req.method) {
     case "GET":

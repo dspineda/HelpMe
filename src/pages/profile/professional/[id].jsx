@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../../styles/ProfileProfessional.module.scss";
 import { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ export default function ProfileProfessional() {
   const [comments, setComments] = useState([]);
   const router = useRouter();
   const { id } = router.query;
+
   const { data: session, status } = useSession();
 
   useEffect(() => {
@@ -39,7 +39,6 @@ export default function ProfileProfessional() {
         },
       });
       const data = await response.json();
-      console.log("🚀 ~ file: [id].jsx ~ line 42 ~ getStatistics ~ data", data)
       if (data.length > 0) {
         setCompleted(data.filter((item) => item.status === "completed"));
         setRejected(data.filter((item) => item.status === "reject"));
@@ -151,9 +150,12 @@ export default function ProfileProfessional() {
                   <strong>Comments:</strong>
                   <ul>
                     {comments.map((item) => (
-                      <li key={item.id}>
+                      <>{item.comment !== "" ?
+                      <li key={item.id}>{item.comment}
                         <strong>{item.client}:</strong> {item.comment}
                       </li>
+                      : null}
+                      </>
                     ))}
                   </ul>
                 </p>

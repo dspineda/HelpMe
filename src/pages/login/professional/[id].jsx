@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import NavbarProfessional from "../../../components/NavbarProfessional";
 import NotFound from "../../../components/NotFound";
 import styles from "../../../styles/ProfessionalId.module.scss";
 
@@ -62,7 +63,7 @@ export default function ProfessionalId() {
         description,
       }),
     });
-    console.log("🚀 ~ file: [id].jsx ~ line 61 ~ handleAccept ~ response", response)
+
     setRender(false);
   };
 
@@ -82,7 +83,6 @@ export default function ProfessionalId() {
         description,
       }),
     });
-    console.log("🚀 ~ file: [id].jsx ~ line 81 ~ handleReject ~ response", response)
     setRender(false);
   };
 
@@ -101,11 +101,6 @@ export default function ProfessionalId() {
     setRender(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.push("/");
-  };
-
   return (
     <>
         <div className={styles.container}>
@@ -121,7 +116,6 @@ export default function ProfessionalId() {
               </div>
             </div>
           </section>
-          <button onClick={handleLogout}>Sign Out</button>
           <section className={styles.section2}>
             <div className={styles.section2__name}>
               <h1>
@@ -249,6 +243,7 @@ export default function ProfessionalId() {
             </div>
           </section>
         </div>
+        <NavbarProfessional />
     </>
   );
 }

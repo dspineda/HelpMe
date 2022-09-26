@@ -24,9 +24,9 @@ function Navbar() {
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
               />
             </div>
-            <di>
+            <div>
               <h5>{session.user.name}</h5>
-            </di>
+            </div>
           </div>
         </header>
       ) : (
