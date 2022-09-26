@@ -14,14 +14,6 @@ const NotificationSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Professional",
     },
-    /*/client: {
-      type: Schema.Types.ObjectId,
-      ref: "Client",
-    },*/
-    /*service: {
-      type: Schema.Types.ObjectId,
-      ref: "Service",
-    },*/
     date: {
       type: String,
       required: true,
@@ -49,6 +41,14 @@ const NotificationSchema = new Schema(
     status: {
       type: String,
       default: "pending",
+    },
+    calification: {
+      type: Number,
+      default: 1,
+    },
+    comment: {
+      type: String,
+      default: "",
     },
   },
   {

@@ -21,14 +21,7 @@ export default function LoginProfessional() {
     const data = await professional.json();
     const { message } = data;
     if (message === "User logged in") {
-      setSpinner(false);
       localStorage.setItem("token", data.token)
-      Swal.fire({
-        title: "You are logged in!",
-        text: "Please wait while we redirect you to your profile.",
-        icon: "success",
-        confirmButtonText: "Got it!",
-      });
       router.push(`/login/professional/${data.id}`);
     } else {
       setSpinner(false);
@@ -83,7 +76,7 @@ export default function LoginProfessional() {
           </section>
         </div>
         <div className={styles.form__input}>
-          <button type="submit">Log in</button>
+        <button type="submit"> {spinner ? <Spinner animation="border" variant="light" /> :'Log in'}</button>
         </div>
       </form>
     </div>

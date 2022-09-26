@@ -59,9 +59,6 @@ const ProfessionalSchema = new Schema(
     reviews: {
       type: Array,
     },
-    rating: {
-      type: Number,
-    },
     photo: {
       type: String,
       default: "https://res.cloudinary.com/davpin/image/upload/v1663655726/HelpMe%20images/habitos-laborales-tecnico-electricista_vjmtzj.jpg",
@@ -72,10 +69,7 @@ const ProfessionalSchema = new Schema(
     },
     isActivated: {
       type: Boolean,
-      default: false,
-    },
-    comments: {
-      type: String,
+      default: true,
     },
     passwordResetActivationToken: String,
     passwordResetActivationExpires: Date,
