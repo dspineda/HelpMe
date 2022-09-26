@@ -36,16 +36,15 @@ export default function CalificationService() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { message } = await updateNotification(id, calification, comment);
-    if (message) {
-      Swal.fire({
-        title: "Calificación enviada",
-        text: "Gracias por calificar el servicio",
-        icon: "success",
-        confirmButtonText: "Aceptar",
-      });
-    }
+    Swal.fire({
+      icon: "success",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
     router.push("/");
   };
+
 
   return (
     <div className={styles.container}>
@@ -59,7 +58,7 @@ export default function CalificationService() {
                 value="1"
                 onChange={handleCalification}
               />
-              <label htmlFor="calification">Nada satisfecho</label>
+              <label htmlFor="calification">Not satisfied</label>
             </div>
             <div>
               <input
@@ -68,7 +67,7 @@ export default function CalificationService() {
                 value="2"
                 onChange={handleCalification}
               />
-              <label htmlFor="calification">Poco satisfecho</label>
+              <label htmlFor="calification">Not very satisfied</label>
             </div>
             <div>
               <input
@@ -86,7 +85,7 @@ export default function CalificationService() {
                 value="4"
                 onChange={handleCalification}
               />
-              <label htmlFor="calification">Muy satisfecho</label>
+              <label htmlFor="calification">Very satisfied</label>
             </div>
             <div>
               <input
@@ -95,7 +94,7 @@ export default function CalificationService() {
                 value="5"
                 onChange={handleCalification}
               />
-              <label htmlFor="calification">Totalmente satisfecho</label>
+              <label htmlFor="calification">Completely satisfied</label>
             </div>
           </div>
         </div>
@@ -111,7 +110,7 @@ export default function CalificationService() {
           </div>
         </div>
         <button type="submit" onClick={handleSubmit}>
-          Enviar
+          Submit
         </button>
       </form>
     </div>

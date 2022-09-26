@@ -151,7 +151,7 @@ export default function ProfileProfessional() {
                   <ul>
                     {comments.map((item) => (
                       <>{item.comment !== "" ?
-                      <li key={item.id}>{item.comment}
+                      <li key={item.id}>
                         <strong>{item.client}:</strong> {item.comment}
                       </li>
                       : null}
