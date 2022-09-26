@@ -35,8 +35,6 @@ function NavbarProfessional() {
     localStorage.removeItem("token");
     router.push("/");
   };
-
-
   return (
     <>
       {id ? (
