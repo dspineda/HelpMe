@@ -49,7 +49,7 @@ export default function ProfileProfessional() {
         data.forEach((item) => {
           score += item.calification;
         });
-        setCalification(score / data.length);
+        setCalification(Math.round(score / data.length));
         
         let comments = [];
         data.forEach((item) => {
@@ -140,9 +140,9 @@ export default function ProfileProfessional() {
                 <p>
                   <strong>Address: </strong> {profile[0]?.address}
                 </p>
-                <p>
+                {/*<p>
                   <strong>Certificates:</strong>
-                </p>
+                </p> */}
                 <p>
                   <strong>Score:&nbsp;</strong> {calification} / 5
                 </p>

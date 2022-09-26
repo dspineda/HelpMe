@@ -2,17 +2,18 @@
 import { useRouter } from "next/router";
 import styles from "../styles/Navbar.module.scss";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 function NavbarProfessional() {
   const [profile, setProfile] = useState([]);
   const BASE_URL = process.env.BASE_URL;
   const router = useRouter();
-  const {id} = router.query
+  const { id } = router.query;
 
   useEffect(() => {
-    if(id){
+    if (id) {
       const token = localStorage.getItem("token");
-      if(token){
+      if (token) {
         const getProfile = async () => {
           const response = await fetch(`/api/maintance/${id}`, {
             method: "GET",
@@ -24,9 +25,9 @@ function NavbarProfessional() {
           const data = await response.json();
           setProfile(data);
         };
-       getProfile();
-      }else{
-        router.push('/login/professional')
+        getProfile();
+      } else {
+        router.push("/login/professional");
       }
     }
   }, [id, router]);
@@ -40,10 +41,22 @@ function NavbarProfessional() {
       {id ? (
         <header>
           <div className={styles.container}>
-            <button onClick={() => router.push(`/login/professional/${profile[0].id}`)}>SETTINGS </button>
-            <button onClick={handleLogout}>
-              SIGN OUT
+            <div className={styles.logo}>
+              <Image
+                src="/img/logo2.png"
+                width={35}
+                height={35}
+                alt="Imagen Home"
+              ></Image>
+            </div>
+            <button
+              onClick={() =>
+                router.push(`/login/professional/${profile[0].id}`)
+              }
+            >
+              SETTINGS{" "}
             </button>
+            <button onClick={handleLogout}>SIGN OUT</button>
             <div className={styles.logo}>
               <img
                 src={profile[0]?.photo}
@@ -52,13 +65,23 @@ function NavbarProfessional() {
               />
             </div>
             <div>
-              <h5>{profile[0]?.firstName} {profile[0]?.lastName}</h5>
+              <h5>
+                {profile[0]?.firstName} {profile[0]?.lastName}
+              </h5>
             </div>
           </div>
         </header>
       ) : (
         <header>
           <div className={styles.container}>
+            <div className={styles.logo}>
+              <Image
+                src="/img/logo2.png"
+                width={35}
+                height={35}
+                alt="Imagen Home"
+              ></Image>
+            </div>
             <button onClick={() => router.push("/")}>HOME </button>
             <button onClick={() => router.push("/login/client")}>LOG IN</button>
           </div>

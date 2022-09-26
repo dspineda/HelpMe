@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Navbar.module.scss";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 function Navbar() {
   const BASE_URL = process.env.BASE_URL;
@@ -13,8 +14,18 @@ function Navbar() {
       {session ? (
         <header>
           <div className={styles.container}>
+            <div className={styles.logo}>
+              <Image
+                src="/img/logo2.png"
+                width={35}
+                height={35}
+                alt="Imagen Home"
+              ></Image>
+            </div>
             <button onClick={() => router.push("/")}>HOME </button>
-            <button onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}>
+            <button
+              onClick={() => signOut({ callbackUrl: "http://localhost:3000" })}
+            >
               SIGN OUT
             </button>
             <div className={styles.logo}>
@@ -32,6 +43,14 @@ function Navbar() {
       ) : (
         <header>
           <div className={styles.container}>
+            <div className={styles.logo}>
+              <Image
+                src="/img/logo2.png"
+                width={35}
+                height={35}
+                alt="Imagen Home"
+              ></Image>
+            </div>
             <button onClick={() => router.push("/")}>HOME </button>
             <button onClick={() => router.push("/login/client")}>LOG IN</button>
           </div>
