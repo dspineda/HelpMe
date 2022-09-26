@@ -11,8 +11,7 @@ export default async function handler(req, res) {
     case "PATCH":
       try {
         const notification = await updateNotification(id, req.body);
-        console.log("🚀 ~ file: [id].js ~ line 14 ~ handler ~ notification", notification)
-        res.status(200).json(notification);
+        res.status(200).json({message: "Calification updated", notification});
       } catch (error) {
         res.status(400).json({ success: false });
       }

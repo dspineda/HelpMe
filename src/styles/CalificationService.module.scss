@@ -1,3 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Raleway:wght@100&display=swap" rel="stylesheet');
+
 .container{
-  color: black;
+    color: black;
+    background-image: url('/img/calification.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: block;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: black;
+  
+  .container__section2{
+    background: transparent;
+    margin-left: 50%;
+    
+
+  }
+  .calification{
+    background: #3B3B3B;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid #EAC60B;
+    color: #EAC60B;
+    margin-top: 10%;
+    input{
+      margin: 20px;
+    }
+  }
+   textarea{
+    margin: 20px;
+    margin-left: 0;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    border: 1px solid #EAC60B;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 20px;
+    color: #EAC60B;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   }
+   button{
+    background: #EAC60B;
+    width: 300px;
+    height: 60px;
+    margin: auto;
+    font-size: 25px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    border: none ;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+    margin-left: 0;
+    border: 1px solid white;
+    border-radius: 10px;
+  }
+  button:hover{
+    background: rgb(240, 207, 45);
+  }
+
+  
+
 }

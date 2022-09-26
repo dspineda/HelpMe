@@ -129,13 +129,18 @@
           flex-wrap: wrap;
         }
         li{
+          width: 500px;
+          height: 300px;
           margin: 5px;
           text-align: left;
           padding: 10px;
           font-family: 'Oswald', sans-serif;
           font-size: 15px;
+          position: relative;
           .section2__buttons{
-            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 30%;
             button{
               background: #EAC60B;
               border: none;

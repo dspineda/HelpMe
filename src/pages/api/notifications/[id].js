@@ -5,13 +5,11 @@ import {
   createNotification,
   findNotificationByProfessional,
   updateNotification,
-  deleteNotification,
 } from "../../../../server/notifications/notifications.service";
 
 export default async function handler(req, res) {
   await dbConnect();
   const { id } = req.query;
-  console.log("🚀 ~ file: [id].js ~ line 14 ~ handler ~ id ", id )
   const { email, name, message, date, time, city, address } = req.body;
   switch (req.method) {
     case "GET":
@@ -53,11 +51,12 @@ export default async function handler(req, res) {
             message,
             date,
             time,
-            url: "http://localhost:3000/login/professional",
+            url: `https://help-me-dav.vercel.app/`,
+            //url: "http://localhost:3000/login/professional",
           }
         };
         await createNotification(notificationData);
-       // await sendMailSendGrid(emailData)
+        await sendMailSendGrid(emailData)
         console.log("Notification sent", professional[0].email);
         return res.status(200).json({ message: "Notification sent" });
       } catch (error) {
@@ -70,7 +69,6 @@ export default async function handler(req, res) {
         console.log("🚀 ~ file: [id].js ~ line 69 ~ handler ~ req.body", req.body)
         
         if (status === "accepted") {
-          console.log("🚀 ~ file: [id].js ~ line 72 ~ handler ~ status", status)
           const emailData = {
             from: '"no-reply" <dspinedao@outlook.com>',
             to: email,
@@ -84,9 +82,9 @@ export default async function handler(req, res) {
               description
             }
           };
-          //const respuesta = await sendMailSendGrid(emailData)
-          const notification = await updateNotification(id, req.body);
-          res.status(200).json(notification);
+          await sendMailSendGrid(emailData)
+          await updateNotification(id, req.body);
+          res.status(200).json({ message: "Notification accepted" });
         }
 
         if (status === "reject") {
@@ -103,12 +101,9 @@ export default async function handler(req, res) {
             description
             }
           };
-          //await sendMailSendGrid(emailData)
-          //const notification = await deleteNotification(id);
-          //await notification.remove();
-          //res.status(200).json({ success: true, data: {} });
-          const notification = await updateNotification(id, req.body);
-          res.status(200).json(notification);
+          await sendMailSendGrid(emailData)
+          await updateNotification(id, req.body);
+          res.status(200).json({ message: "Notification rejected" });
         }
 
         if (status === "completed") {
@@ -121,12 +116,12 @@ export default async function handler(req, res) {
             dynamic_template_data: {
             client,
             description,
-            url: `http://localhost:3000/calification-service/${id}`
+            url: `https://help-me-dav.vercel.app/calification-service/${id}`
             }
           }
-          //await sendMailSendGrid(emailData)
-          const notification = await updateNotification(id, req.body);
-          res.status(200).json(notification);
+          await sendMailSendGrid(emailData)
+          await updateNotification(id, req.body);
+          res.status(200).json({ message: "Notification completed" });
         }
       } catch (error) {
         res.status(400).json({ success: false });
