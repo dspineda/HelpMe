@@ -44,7 +44,7 @@ const NotificationSchema = new Schema(
     },
     calification: {
       type: Number,
-      default: 1,
+      default: 0,
     },
     comment: {
       type: String,

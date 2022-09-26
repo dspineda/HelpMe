@@ -45,17 +45,9 @@ const ProfessionalSchema = new Schema(
         ref: "Notification",
       },
     ],
-    certificates: [
-      {
-        name: {
-          type: String,
-        },
-        url: {
-          type: String,
-
-        },
-      },
-    ],
+    certificates: {
+      type: String,
+    },
     reviews: {
       type: Array,
     },

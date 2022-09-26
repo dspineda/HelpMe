@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   await dbConnect();
   const BASE_URL = process.env.BASE_URL;
   const userData = req.body;
+  console.log("🚀 ~ file: register-professional.js ~ line 12 ~ handler ~ userData", userData)
   const userFound = await findProfessionalByEmail(userData.professional.email);
  
   if (userFound) {
