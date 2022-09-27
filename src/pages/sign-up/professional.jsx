@@ -18,7 +18,6 @@ export default function SignUpProfessional() {
   useEffect(() => {
     Object.assign(form, { photo: image }, { certificates: certificates });
     setFormToSend({ name: service, professional: form });
-    console.log("🚀 ~ file: professional.jsx ~ line 21 ~ useEffect ~ FormToSend", formToSend)
   }, [service, form, image, certificates]);
 
   const newProfessional = async () => {
