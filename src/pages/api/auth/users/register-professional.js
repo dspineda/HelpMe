@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         url: `${BASE_URL}/activate-account/${hash}`,
       },
     };
-    //await sendMailSendGrid(emailData);
+    await sendMailSendGrid(emailData);
     console.log('User created successfully', professional);
     return res.status(200).json({ message: 'User created successfully' });
   } catch (error) {
