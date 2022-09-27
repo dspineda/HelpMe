@@ -9,6 +9,7 @@ import NavbarProfessional from "../components/NavbarProfessional";
 import Footer from "../components/Footer";
 import styles from "../styles/Home.module.scss";
 import { useEffect, useState } from "react";
+import NotFound from "../components/NotFound";
 
 export default function Home() {
   const [isToken, setIsToken] = useState(false)
@@ -79,6 +80,8 @@ export default function Home() {
     }
   }
   return (
+    <>
+    {session ? (
     <div className={styles.container}>
       { isToken === true ? <NavbarProfessional/> : <Navbar/>}
       <Head>
@@ -211,5 +214,9 @@ export default function Home() {
       </section>
       <Footer />
     </div>
+    ) : (
+      <NotFound />
+    )}
+    </>
   );
 }
