@@ -20,6 +20,24 @@ export const createProfessional = async (serviceData) => {
   }
 };
 
+export const deleteProfessional = async (serviceData) => {
+  try {
+    const findNameService = await Service.findOne({ name: serviceData.name });
+
+    if (findNameService) {
+      return Service.findOneAndUpdate(
+        { name: serviceData.name },
+        { $pull: { professional: serviceData.professional } },
+        { new: true }
+
+      );
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+
 export const findProfessionalByEmail = async (email) => {
   try {
     const professional = await Service.findOne({ "professional.email": email });

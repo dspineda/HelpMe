@@ -49,7 +49,7 @@ export default function ProfileProfessional() {
         data.forEach((item) => {
           score += item.calification;
         });
-        setCalification(score / data.length);
+        setCalification(Math.round(score / data.length));
         
         let comments = [];
         data.forEach((item) => {

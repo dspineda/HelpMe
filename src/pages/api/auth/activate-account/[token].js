@@ -5,8 +5,10 @@ import dbConnect from "../../../../../server/config/database";
 export default async function verifyAccount(req, res) {
   await dbConnect();
   const { token } = req.query;
+  console.log("🚀 ~ file: [token].js ~ line 8 ~ verifyAccount ~ token", token)
   try {
     let professional = await findOneUserByResetToken(token);
+    console.log("🚀 ~ file: [token].js ~ line 11 ~ verifyAccount ~ professional", professional)
     if (!professional) {
       console.log("Invalid token");
       return res.status(400).json({ message: "Invalid token" });
