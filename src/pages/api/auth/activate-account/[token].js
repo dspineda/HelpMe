@@ -7,10 +7,6 @@ export default async function verifyAccount(req, res) {
   const { token } = req.query;
   try {
     let professional = await findOneUserByResetToken(token);
-    console.log(
-      "🚀 ~ file: [token].js ~ line 11 ~ verifyAccount ~ professional",
-      professional
-    );
     if (!professional) {
       console.log("Invalid token");
       return res.status(400).json({ message: "Invalid token" });
