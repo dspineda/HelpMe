@@ -75,14 +75,36 @@ export const findOneUserByResetToken = async (token) => {
     );
 
     if (professionalAppliances) {
+      await Service.findOneAndUpdate(
+        {
+          "professional.passwordResetActivationToken": token,
+        },
+        { $set: { "professional.$.isActivated": true } },
+        { new: true }
+      );
+
       return professionalAppliances;
     }
 
     if (professionalAutomation) {
+      await Service.findOneAndUpdate(
+        {
+          "professional.passwordResetActivationToken": token,
+        },
+        { $set: { "professional.$.isActivated": true } },
+        { new: true }
+      );
       return professionalAutomation;
     }
 
     if (professionalElectrician) {
+      await Service.findOneAndUpdate(
+        {
+          "professional.passwordResetActivationToken": token,
+        },
+        { $set: { "professional.$.isActivated": true } },
+        { new: true }
+      );
       return professionalElectrician;
     }
   } catch (error) {
