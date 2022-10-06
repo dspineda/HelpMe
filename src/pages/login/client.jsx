@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Head from "next/head";
 import styles from "../../styles/LoginClient.module.scss";
 
@@ -45,8 +46,20 @@ export default function LoginProfessional() {
         <link rel="icon" href="/img/logo1.png" />
       </Head>
       <div className={styles.container__title}>
-        <h1>Log in to HelpMe</h1>
-        <h4>User</h4>
+        <div className={styles.logo}>
+          <button onClick={() => router.push(`/`)}>
+            <Image
+              src="/img/logo2.png"
+              width={40}
+              height={40}
+              alt="Imagen Home"
+            ></Image>
+          </button>
+        </div>
+        <div>
+          <h1>Log in to HelpMe</h1>
+          <h4>User</h4>
+        </div>
       </div>
       <form className={styles.form} onSubmit={handleSignUp}>
         <div className={styles.section}>
