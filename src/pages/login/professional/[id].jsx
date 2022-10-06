@@ -11,6 +11,8 @@ export default function ProfessionalId() {
   const [profile, setProfile] = useState([]);
   const [services, setServices] = useState([]);
   const [render, setRender] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [calification, setCalification] = useState([]);
   const router = useRouter();
   const { id } = router.query;
 
@@ -40,8 +42,43 @@ export default function ProfessionalId() {
           const data = await response.json();
           setServices(data);
         };
+        const getStatistics = async () => {
+          const response = await fetch(`/api/notifications/${id}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const data = await response.json();
+          if (data.length > 0) {
+            let score = 0;
+            data.forEach((item) => {
+              if (item.calification !== 0) {
+                score += item.calification;
+              }
+            });
+            setCalification(
+              Math.round(
+                score / data.filter((item) => item.calification !== 0).length
+              )
+            );
+
+            let comments = [];
+            data.forEach((item) => {
+              if (item.comment !== "") {
+                comments.push({
+                  comment: item.comment,
+                  client: item.client,
+                  id: item._id,
+                });
+              }
+            });
+            setComments(comments);
+          }
+        };
         getProfile();
         getNotification();
+        getStatistics();
       } else {
         router.push("/login/professional");
       }
@@ -199,11 +236,18 @@ export default function ProfessionalId() {
               <strong>certificates:</strong>
             </p>*/}
             <p>
-              <strong>score:</strong>
+              <strong>score:</strong> {calification} / 5
             </p>
-            <p>
-              <strong>comments:</strong>
-            </p>
+            <div>
+            <strong>comments:</strong>
+            <ul>
+              {comments.map((item) => (
+                <li key={item.id}>
+                  <strong>{item.client}:</strong> {item.comment}
+                </li>
+              ))}
+            </ul>
+            </div>
           </div>
           <div className={styles.section2__notifications}>
             <h5>Notifications</h5>
